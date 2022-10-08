@@ -22,8 +22,8 @@ Class FormTypeStage extends AbstractType
     {
         $builder
             //form_adresse_stage
-            ->add('debut_stage', DateType::class, ['label' => 'Date de début * :'])
-            ->add('fin_stage', DateType::class, ['label' => 'Date de fin  * :'])
+            ->add('debut_stage', DateType::class, ['label' => 'Date de début * :', 'widget' => 'single_text','format' => 'yyyy-MM-dd  HH:mm','html5' => false])
+            ->add('fin_stage', DateType::class, ['label' => 'Date de fin  * :',  'widget' => 'single_text','format' => 'yyyy-MM-dd  HH:mm','html5' => false])
             ->add('nbjour_stage', IntegerType::class, ['label' => 'Nombre de jour de stage * :'])
             ->add('service_stage', TextType::class, ['label' => 'Service dans l\'entreprise :', 'required' => false])
             ->add('mission_stage', TextareaType::class, ['label' => 'Mission principale * :'])

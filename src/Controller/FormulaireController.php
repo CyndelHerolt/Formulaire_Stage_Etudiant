@@ -199,11 +199,36 @@ class FormulaireController extends AbstractController
             //Si clic sur "suivant"
             else {
                 $FormulaireRepository->save($formulaire);
-                return $this->redirectToRoute('app_formulaire');
+                return $this->redirectToRoute('final', ['formulaire' => $formulaire->getId()]);
             }
         }
 
         return $this->renderForm('formulaire/index.html.twig', ['form_stage' => $form6, 'step'=>6, 'formulaire' => $formulaire]);
+    }
+
+
+    #[Route('/formulaire/final/{formulaire}', name: 'final')]
+    public function index(Request $request,FormulaireRepository $FormulaireRepository, $formulaire): Response
+    {
+        $formulaire = $FormulaireRepository->find($formulaire);
+
+        $form6 = $this->createForm(FormTypeStage::class, $formulaire);
+
+        $form6->handleRequest($request);
+        if ($form6->isSubmitted() && $form6->isValid()) {
+
+            //Si clic sur "retour"
+            if ($form6->get('retour')->isClicked()) {
+                //Alors location->formulaire/entreprise
+                return $this->redirectToRoute('app_formulaireAdresseStage', ['formulaire' => $formulaire->getId()]);
+            } //Si clic sur "suivant"
+            else {
+                $FormulaireRepository->save($formulaire);
+                return $this->redirectToRoute('app_formulaire', ['formulaire' => $formulaire->getId()]);
+            }
+        }
+
+        return $this->renderForm('formulaire/index.html.twig', ['form_stage' => $form6, 'step' => 7, 'formulaire' => $formulaire]);
     }
 }
 

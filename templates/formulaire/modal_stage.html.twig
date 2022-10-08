@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <p class="confirm_infos">Date de début : {{ test.debutStage|date('d-m-Y') }}</p>
+    <p class="confirm_infos">Date de fin : {{ test.finStage|date('d-m-Y') }}</p>
+    <p class="confirm_infos">Nombre de jours de stage : {{ test.nbjourStage }} <br></p>
+    <p class="confirm_infos">Service dans l'entreprise : {{ test.serviceStage }} <br></p>
+    <p class="confirm_infos">Mission principale : {{ test.missionStage }} <br></p>
+    <p class="confirm_infos">Activités à réaliser : {{ test.activitesStage }} <br></p>
+    <p class="confirm_infos">Périodes d'interruptions : {{ test.interruptionsStage }} <br></p>
+    <p class="confirm_infos">Durée de travail hebdomadaire : {{ test.dthStage }} <br></p>
+    <p class="confirm_infos">Commentaires sur la durée du travail : {{ test.commdthStage }} <br></p>
+    <p class="confirm_infos">Aménagement du stage : {{ test.amenagementStage }} <br></p>
+    <p class="confirm_infos">Gratification : {{ test.gratifStage }} <br></p>
+    <p class="confirm_infos">Période de gratification : {{ test.periodegratifStage }} <br></p>
+    <p class="confirm_infos">Montant de la gratification : {{ test.montantgratifStage }} <br></p>
+    <p class="confirm_infos">Avantages : {{ test.avantagesStage }} <br></p>
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

@@ -75,7 +75,29 @@
 
         <h2>Le Stage</h2>
 
-        {{ form(form_stage) }}
+        <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_adss_stage', {formulaire:formulaire.id})}) }}>
+
+            <div data-formulaire-target="connect">{{ form(form_stage) }}</div>
+
+            {{ include('_modal.html.twig', {
+                modalTitle: 'Récapitulatif des informations de l\'adresse du stage'
+            }) }}
+
+        </div>
+
+    {% elseif step==7 %}
+
+        <h2>Le Stage</h2>
+
+        <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_stage', {formulaire:formulaire.id})}) }}>
+
+            <div data-formulaire-target="connect">{{ form(form_stage) }}</div>
+
+            {{ include('_modal.html.twig', {
+                modalTitle: 'Récapitulatif des informations du stage'
+            }) }}
+
+        </div>
 
     {% endif %}
 

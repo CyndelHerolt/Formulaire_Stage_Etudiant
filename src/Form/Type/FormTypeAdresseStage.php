@@ -17,8 +17,8 @@ Class FormTypeAdresseStage extends AbstractType
     {
         $builder
             //form_adresse_stage
-            ->add('adresse_stage', TextType::class, ['label' => 'Votre adresse (numéro, rue) * :'])
-            ->add('suite_adresse_stage', TextType::class, ['label' => 'Suite adresse (étage, bâtiment, ...) :  * :', 'required' => false])
+            ->add('adresse_stage', TextType::class, ['label' => 'Adresse (numéro, rue) * :'])
+            ->add('suite_adresse_stage', TextType::class, ['label' => 'Suite adresse (étage, bâtiment, ...) :', 'required' => false])
             ->add('complement_adresse_stage', TextType::class, ['label' => 'Complément d’adresse :', 'required' => false])
             ->add('cp_stage', ChoiceType::class, ['label' => 'Code Postal * :', 'choices' => ['API' => 'API']])
             ->add('ville_stage', TextType::class, ['label' => 'Ville * :'])
