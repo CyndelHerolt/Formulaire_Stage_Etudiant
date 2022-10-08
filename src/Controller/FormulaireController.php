@@ -135,8 +135,6 @@ class FormulaireController extends AbstractController
                 return $this->redirectToRoute('app_formulaireResponsable', ['formulaire' => $formulaire->getId()]);
             }
 
-            //todo: Autocomplétion avec les infos de la partie précédente onclic
-
             elseif ($form4 -> get('recup_informations') -> isClicked() ) {
                 $formulaire->setPrenomTuteur($formulaire->getPrenomResponsable());
                 $formulaire->setNomTuteur($formulaire->getNomResponsable());

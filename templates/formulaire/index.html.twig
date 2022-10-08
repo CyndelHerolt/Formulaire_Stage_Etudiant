@@ -47,13 +47,29 @@
 
         <h2>Le tuteur entreprise</h2>
 
-        {{ form(form_tuteur) }}
+        <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_responsable', {formulaire:formulaire.id})}) }}>
+
+            <div data-formulaire-target="connect">{{ form(form_tuteur) }}</div>
+
+            {{ include('_modal.html.twig', {
+                modalTitle: 'Récapitulatif des informations du responsable'
+            }) }}
+
+        </div>
 
     {% elseif step==5 %}
 
         <h2>Adresse du lieu où le stage sera effectué</h2>
 
-        {{ form(form_adss_stage) }}
+        <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_tuteur', {formulaire:formulaire.id})}) }}>
+
+            <div data-formulaire-target="connect">{{ form(form_adss_stage) }}</div>
+
+            {{ include('_modal.html.twig', {
+                modalTitle: 'Récapitulatif des informations du tuteur'
+            }) }}
+
+        </div>
 
     {% elseif step==6 %}
 

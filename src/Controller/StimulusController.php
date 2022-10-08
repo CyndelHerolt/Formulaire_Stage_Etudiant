@@ -9,7 +9,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StimulusController extends AbstractController
 {
-    #[Route('/formulaire-test/entreprise/{formulaire}', name: 'app_stimulus')]
+    #[Route('/formulaire-test/vous/{formulaire}', name: 'app_stimulus')]
     public function modal_vous(FormulaireRepository $FormulaireRepository, $formulaire)
     {
 
@@ -23,7 +23,7 @@ class StimulusController extends AbstractController
     //-----------------------------MODAL ENTREPRISE------------------------------
     //---------------------------------------------------------------------------
 
-    #[Route('/formulaire-test/responsable/{formulaire}', name: 'app_stimulus_modal_entreprise')]
+    #[Route('/formulaire-test/entreprise/{formulaire}', name: 'app_stimulus_modal_entreprise')]
     public function modal_entreprise(FormulaireRepository $FormulaireRepository, $formulaire)
     {
 
@@ -31,6 +31,33 @@ class StimulusController extends AbstractController
 
 
         return $this->render('formulaire/modal_entreprise.html.twig', ['test'=>$formulaire]);
+    }
+
+    //---------------------------------------------------------------------------
+    //-----------------------------MODAL RESPONSABLE------------------------------
+    //---------------------------------------------------------------------------
+
+    #[Route('/formulaire-test/responsable/{formulaire}', name: 'app_stimulus_modal_responsable')]
+    public function modal_responsable(FormulaireRepository $FormulaireRepository, $formulaire)
+    {
+
+            $formulaire=$FormulaireRepository->find($formulaire);
+
+
+        return $this->render('formulaire/modal_responsable.html.twig', ['test'=>$formulaire]);
+    }
+//---------------------------------------------------------------------------
+    //-----------------------------MODAL TUTEUR------------------------------
+    //---------------------------------------------------------------------------
+
+    #[Route('/formulaire-test/tuteur/{formulaire}', name: 'app_stimulus_modal_tuteur')]
+    public function modal_tuteur(FormulaireRepository $FormulaireRepository, $formulaire)
+    {
+
+            $formulaire=$FormulaireRepository->find($formulaire);
+
+
+        return $this->render('formulaire/modal_tuteur.html.twig', ['test'=>$formulaire]);
     }
 
 }
