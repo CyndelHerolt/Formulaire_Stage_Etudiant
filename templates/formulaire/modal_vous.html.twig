@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <p class="confirm_infos">Organisme de sécurité sociale : {{ test.nomSecu }}</p>
+    <p class="confirm_infos">Adresse de l'organisme : {{ test.adssSecu }}</p>
+    <p class="confirm_infos">Votre adresse : {{ test.adresseVous }} <br>
+        {{ test.suiteAdresseVous }} <br>
+        {{ test.complementAdresseVous }} <br>
+        {{ test.cpVous }} <br>
+        {{ test.villeVous }} <br>
+        {{ test.paysVous }}</p>
+    <p class="confirm_infos">Votre email personnel : {{ test.emailVous }}</p>
+    <p class="confirm_infos">Votre numéro de téléphone : {{ test.telVous }}</p>
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+

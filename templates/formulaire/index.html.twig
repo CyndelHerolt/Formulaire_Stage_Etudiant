@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire Stage{% endblock %}
+
+{% block body %}
+
+<div class="example-wrapper">
+
+    <div class="card col-9">
+        <div class="card-body">
+    {% if step==1 %}
+
+        <h2>Vos informations</h2>
+        <p  >Merci de vérifier vos informations ci-dessous.</p>
+
+        {{ form(form_vous) }}
+
+    {% elseif step==2 %}
+
+        <h2>L'entreprise d'accueil</h2>
+
+        <div {{ stimulus_controller('formulaire', {url:path('app_stimulus', {formulaire:formulaire.id})}) }}>
+
+            <div data-formulaire-target="connect">{{ form(form_entreprise) }}</div>
+
+            {{ include('_modal.html.twig', {
+                modalTitle: 'Récapitulatif de vos informations'
+            }) }}
+
+        </div>
+
+    {% elseif step==3 %}
+
+        <h2>Le responsable de l'entreprise (Signataire de la convention)</h2>
+
+        <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_entreprise', {formulaire:formulaire.id})}) }}>
+
+            <div data-formulaire-target="connect">{{ form(form_responsable) }}</div>
+
+            {{ include('_modal.html.twig', {
+                modalTitle: 'Récapitulatif des informations de l\'entreprise'
+            }) }}
+
+        </div>
+
+    {% elseif step==4 %}
+
+        <h2>Le tuteur entreprise</h2>
+
+        {{ form(form_tuteur) }}
+
+    {% elseif step==5 %}
+
+        <h2>Adresse du lieu où le stage sera effectué</h2>
+
+        {{ form(form_adss_stage) }}
+
+    {% elseif step==6 %}
+
+        <h2>Le Stage</h2>
+
+        {{ form(form_stage) }}
+
+    {% endif %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

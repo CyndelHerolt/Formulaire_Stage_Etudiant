@@ -1,0 +1,36 @@
+<?php
+
+// src/Controller/FormulaireController.php
+namespace App\Controller;
+
+use App\Repository\FormulaireRepository;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Routing\Annotation\Route;
+
+class StimulusController extends AbstractController
+{
+    #[Route('/formulaire-test/entreprise/{formulaire}', name: 'app_stimulus')]
+    public function modal_vous(FormulaireRepository $FormulaireRepository, $formulaire)
+    {
+
+            $formulaire=$FormulaireRepository->find($formulaire);
+
+
+        return $this->render('formulaire/modal_vous.html.twig', ['test'=>$formulaire]);
+    }
+
+    //---------------------------------------------------------------------------
+    //-----------------------------MODAL ENTREPRISE------------------------------
+    //---------------------------------------------------------------------------
+
+    #[Route('/formulaire-test/responsable/{formulaire}', name: 'app_stimulus_modal_entreprise')]
+    public function modal_entreprise(FormulaireRepository $FormulaireRepository, $formulaire)
+    {
+
+            $formulaire=$FormulaireRepository->find($formulaire);
+
+
+        return $this->render('formulaire/modal_entreprise.html.twig', ['test'=>$formulaire]);
+    }
+
+}

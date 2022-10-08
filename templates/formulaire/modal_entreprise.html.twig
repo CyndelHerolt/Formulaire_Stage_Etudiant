@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <p class="confirm_infos">Raison Sociale : {{ test.raisonSociale }}</p>
+    <p class="confirm_infos">N° de siret : {{ test.siret }}</p>
+    <p class="confirm_infos">Adresse : {{ test.adresseEntreprise }} <br>
+        {{ test.suiteAdresseEntreprise }} <br>
+        {{ test.complementAdresseEntreprise }} <br>
+        {{ test.cpEntreprise }} <br>
+        {{ test.villeEntreprise }} <br>
+        {{ test.paysEntreprise }}</p>
+
+{% endblock %}
+
+{% block title %}
+
+{% endblock %}
+
