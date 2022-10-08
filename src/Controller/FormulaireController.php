@@ -177,7 +177,7 @@ class FormulaireController extends AbstractController
             }
         }
 
-            return $this->renderForm('formulaire/index.html.twig', ['form_adss_stage' => $form5, 'step' => 5, 'formulaire' => $formulaire->getId()]);
+            return $this->renderForm('formulaire/index.html.twig', ['form_adss_stage' => $form5, 'step' => 5, 'formulaire' => $formulaire]);
         }
 
 
@@ -203,7 +203,7 @@ class FormulaireController extends AbstractController
             }
         }
 
-        return $this->renderForm('formulaire/index.html.twig', ['form_stage' => $form6, 'step'=>6, 'formulaire' => $formulaire->getId()]);
+        return $this->renderForm('formulaire/index.html.twig', ['form_stage' => $form6, 'step'=>6, 'formulaire' => $formulaire]);
     }
 }
 

@@ -46,6 +46,7 @@ class StimulusController extends AbstractController
 
         return $this->render('formulaire/modal_responsable.html.twig', ['test'=>$formulaire]);
     }
+
 //---------------------------------------------------------------------------
     //-----------------------------MODAL TUTEUR------------------------------
     //---------------------------------------------------------------------------
