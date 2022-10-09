@@ -166,15 +166,25 @@ class FormulaireController extends AbstractController
         if ($form5->isSubmitted() && $form5->isValid()) {
 
             //Si clic sur "retour"
-            if ($form5 -> get('retour') -> isClicked()){
+            if ($form5 -> get('suivant') -> isClicked()){
                 //Alors location->formulaire/entreprise
-                return $this->redirectToRoute('app_formulaireTuteur', ['formulaire' => $formulaire->getId()]);
-            }
-            //Si clic sur "suivant"
-            else {
                 $FormulaireRepository->save($formulaire);
                 return $this->redirectToRoute('app_formulaireStage', ['formulaire' => $formulaire->getId()]);
             }
+            //Si clic sur "suivant"
+            elseif($form5 -> get('retour') -> isClicked()) {
+                return $this->redirectToRoute('app_formulaireTuteur', ['formulaire' => $formulaire->getId()]);
+            }
+            elseif($form5 -> get('recup_informations') -> isClicked()) {
+                $formulaire->setAdresseStage($formulaire->getAdresseEntreprise());
+                $formulaire->setSuiteAdresseStage($formulaire->getSuiteAdresseEntreprise());
+                $formulaire->setComplementAdresseStage($formulaire->getComplementAdresseEntreprise());
+                $formulaire->setCpStage($formulaire->getCpEntreprise());
+                $formulaire->setVilleStage($formulaire->getVilleEntreprise());
+                $form5 = $this->createForm(FormTypeAdresseStage::class, $formulaire);
+            }
+
+
         }
 
             return $this->renderForm('formulaire/index.html.twig', ['form_adss_stage' => $form5, 'step' => 5, 'formulaire' => $formulaire]);
