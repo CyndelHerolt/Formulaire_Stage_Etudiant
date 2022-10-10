@@ -4,105 +4,167 @@
 
 {% block body %}
 
-<div class="example-wrapper">
+    <div class="example-wrapper">
 
-    <div class="card col-9">
-        <div class="card-body">
-    {% if step==1 %}
+        <div class="card col-9">
+            <div class="card-body">
+                {% if step==1 %}
 
-        <h2>Vos informations</h2>
-        <p  >Merci de vérifier vos informations ci-dessous.</p>
+                    <h2>Vos informations</h2>
+                    <p>Merci de vérifier vos informations ci-dessous.</p>
+                    <div class="form_rows">
+                        {{ form(form_vous) }}
+                    </div>
+                    {#                    {{ form_row(form_vous.nom_secu) }} #}
 
-        {{ form(form_vous) }}
+                {% elseif step==2 %}
 
-    {% elseif step==2 %}
+                    <h2>L'entreprise d'accueil</h2>
 
-        <h2>L'entreprise d'accueil</h2>
+                    <div {{ stimulus_controller('formulaire', {url:path('app_stimulus', {formulaire:formulaire.id})}) }}>
 
-        <div {{ stimulus_controller('formulaire', {url:path('app_stimulus', {formulaire:formulaire.id})}) }}>
+                        <div data-formulaire-target="connect">{{ form(form_entreprise) }}</div>
 
-            <div data-formulaire-target="connect">{{ form(form_entreprise) }}</div>
+                        {{ include('_modal.html.twig', {
+                            modalTitle: 'Récapitulatif de vos informations'
+                        }) }}
 
-            {{ include('_modal.html.twig', {
-                modalTitle: 'Récapitulatif de vos informations'
-            }) }}
+                    </div>
 
-        </div>
+                {% elseif step==3 %}
 
-    {% elseif step==3 %}
+                    <h2>Le responsable de l'entreprise (Signataire de la convention)</h2>
 
-        <h2>Le responsable de l'entreprise (Signataire de la convention)</h2>
+                    <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_entreprise', {formulaire:formulaire.id})}) }}>
 
-        <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_entreprise', {formulaire:formulaire.id})}) }}>
+                        <div data-formulaire-target="connect">{{ form(form_responsable) }}</div>
 
-            <div data-formulaire-target="connect">{{ form(form_responsable) }}</div>
+                        {{ include('_modal.html.twig', {
+                            modalTitle: 'Récapitulatif des informations de l\'entreprise'
+                        }) }}
 
-            {{ include('_modal.html.twig', {
-                modalTitle: 'Récapitulatif des informations de l\'entreprise'
-            }) }}
+                    </div>
 
-        </div>
+                {% elseif step==4 %}
 
-    {% elseif step==4 %}
+                    <h2>Le tuteur entreprise</h2>
 
-        <h2>Le tuteur entreprise</h2>
+                    <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_responsable', {formulaire:formulaire.id})}) }}>
 
-        <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_responsable', {formulaire:formulaire.id})}) }}>
+                        <div data-formulaire-target="connect">{{ form(form_tuteur) }}</div>
 
-            <div data-formulaire-target="connect">{{ form(form_tuteur) }}</div>
+                        {{ include('_modal.html.twig', {
+                            modalTitle: 'Récapitulatif des informations du responsable'
+                        }) }}
 
-            {{ include('_modal.html.twig', {
-                modalTitle: 'Récapitulatif des informations du responsable'
-            }) }}
+                    </div>
 
-        </div>
+                {% elseif step==5 %}
 
-    {% elseif step==5 %}
+                    <h2>Adresse du lieu où le stage sera effectué</h2>
 
-        <h2>Adresse du lieu où le stage sera effectué</h2>
+                    <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_tuteur', {formulaire:formulaire.id})}) }}>
 
-        <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_tuteur', {formulaire:formulaire.id})}) }}>
+                        <div data-formulaire-target="connect">{{ form(form_adss_stage) }}</div>
 
-            <div data-formulaire-target="connect">{{ form(form_adss_stage) }}</div>
+                        {{ include('_modal.html.twig', {
+                            modalTitle: 'Récapitulatif des informations du tuteur'
+                        }) }}
 
-            {{ include('_modal.html.twig', {
-                modalTitle: 'Récapitulatif des informations du tuteur'
-            }) }}
+                    </div>
 
-        </div>
+                {% elseif step==6 %}
 
-    {% elseif step==6 %}
+                    <h2>Le Stage</h2>
 
-        <h2>Le Stage</h2>
+                    <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_adss_stage', {formulaire:formulaire.id})}) }}>
 
-        <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_adss_stage', {formulaire:formulaire.id})}) }}>
+                        <div data-formulaire-target="connect">{{ form(form_stage) }}</div>
 
-            <div data-formulaire-target="connect">{{ form(form_stage) }}</div>
+                        {{ include('_modal.html.twig', {
+                            modalTitle: 'Récapitulatif des informations de l\'adresse du stage'
+                        }) }}
 
-            {{ include('_modal.html.twig', {
-                modalTitle: 'Récapitulatif des informations de l\'adresse du stage'
-            }) }}
+                    </div>
 
-        </div>
+                {% elseif step==7 %}
 
-    {% elseif step==7 %}
+                    <h2>Le Stage</h2>
 
-        <h2>Le Stage</h2>
+                    <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_stage', {formulaire:formulaire.id})}) }}>
 
-        <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_stage', {formulaire:formulaire.id})}) }}>
+                        <div data-formulaire-target="connect">{{ form(form_stage) }}</div>
 
-            <div data-formulaire-target="connect">{{ form(form_stage) }}</div>
+                        {{ include('_modal.html.twig', {
+                            modalTitle: 'Récapitulatif des informations du stage'
+                        }) }}
 
-            {{ include('_modal.html.twig', {
-                modalTitle: 'Récapitulatif des informations du stage'
-            }) }}
+                    </div>
 
-        </div>
+                {% endif %}
 
-    {% endif %}
-
+            </div>
         </div>
     </div>
-</div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+
+    <script defer>
+        window.addEventListener('load', () => {
+            // if form_type_vous_cp_vous != focus -> var cp => valeur saisie : form_type_vous_cp_vous
+            document.getElementById('form_type_vous_cp_vous').addEventListener('blur', (e) => {
+                let cp = e.currentTarget.value
+
+                // url : liste communes / cp saisi -> inject dans data => data.json
+                fetch('https://apicarto.ign.fr/api/codes-postaux/communes/' + cp)
+                    .then((data) => {
+                        return data.json()
+                    })
+
+                    .then((data) => {
+                        // input "ville" = var ville
+                        let ville = document.getElementById('form_type_vous_ville_vous')
+                        // options
+                        let options = document.querySelectorAll('#form_type_vous_ville_vous option')
+                        options.forEach((option) => {
+                            option.remove()
+                        })
+                        data.forEach(element => {
+                            let opt1 = document.createElement("option")
+                            opt1.text = element.nomCommune
+                            opt1.setAttribute('value', element.nomCommune)
+                            ville.append(opt1)
+                            console.log(ville)
+                            console.log(element.nomCommune)
+                        })
+                        ;
+                    })
+            })
+            // document.getElementById('form_type_vous_verif').addEventListener('click', (e) => {
+            //     let adss = document.getElementById('form_type_vous_adresse_vous').value
+            //     let cp = document.getElementById('form_type_vous_cp_vous').value
+            //     let ville = document.getElementById('form_type_vous_ville_vous').value
+            //     let adresse = adss + ' ' + cp + ' ' + ville;
+            //
+            //     fetch('https://api-adresse.data.gouv.fr/search/?q=' + adresse)
+            //         .then((data) => {
+            //             return data.json()
+            //         })
+            //         .then((data) => {
+            //             console.log(data)
+            //             // if (data === adresse) {
+            //             //     alert('Adresse valide')
+            //             //     // document.getElementById('form_type_vous_verif').className = 'btn btn-success'
+            //             // } else {
+            //             //     alert('Adresse invalide')
+            //             //     // document.getElementById('form_type_vous_verif').className = 'btn btn-danger'
+            //             // }
+            //         })
+            // })
+        })
+
+    </script>
 
 {% endblock %}

@@ -1,0 +1,59 @@
+// Copyright (c) 2022. | David Annebicque | IUT de Troyes  - All Rights Reserved
+// @file /Users/davidannebicque/Sites/intranetV3/assets/css/color.scss
+// @author davidannebicque
+// @project intranetV3
+// @lastUpdate 06/05/2022 15:47
+@use "sass:map";
+
+
+@function text-clr($color) {
+  @if (lightness($color) > 60) {
+    @return #000;
+  } @else {
+    @return #fff;
+  }
+}
+
+
+
+$colors: (
+        blue:#1971c2,
+        indigo: #6741d9,
+        purple: #9c36b5,
+        pink: #c2255c,
+        red: #e03131,
+        orange: #e8590c,
+        yellow: #f08c00,
+        green: #2f9e44,
+        teal: #099268,
+        cyan: #0c8599,
+        lime: #66a80f
+);
+
+
+@each $color-key, $color-value in $colors {
+  .cm_#{$color-key} {
+    background-color: $color-value;
+    color: text-clr($color-value);
+  }
+
+  .td_#{$color-key} {
+    background-color: lighten($color-value, 10%);
+    color: text-clr(lighten($color-value, 10%));
+  }
+
+  .tp_#{$color-key} {
+    background-color: lighten($color-value, 20%);
+    color: text-clr(lighten($color-value, 20%));
+  }
+
+  .roje_#{$color-key} {
+    background-color: lighten($color-value, 30%);
+    color: text-clr(lighten($color-value, 30%));
+  }
+
+  .carre_#{$color-key} {
+    background-color: $color-value;
+  }
+}
+
