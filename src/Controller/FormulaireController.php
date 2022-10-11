@@ -35,18 +35,18 @@ class FormulaireController extends AbstractController
         //var_dump($task);
 
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
 
-            //$task = $form->getData();
+//            dump($task);
+//            die();
 
             //(obligatoire 1ere fois) $entityManager->persist( $task ); // on déclare une modification de type persist et la génération des différents liens entre entité
             //$entityManager->flush(); // on effectue les différentes modifications sur la base de données
             //Autre manière de procéder
 
-
             $FormulaireRepository->save($task);
 
-//            dump($task);
             return $this->redirectToRoute('app_formulaireEntreprise', ['formulaire' => $task->getId()]);
         }
 

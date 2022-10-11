@@ -12,14 +12,24 @@
 
                     <h2>Vos informations</h2>
                     <p>Merci de vérifier vos informations ci-dessous.</p>
+                    <p>La complétion des champs marqués d'un astérisque (*) est obligatoire.</p>
                     <div class="form_rows">
-                        {{ form(form_vous) }}
+                        {{ form_start(form_vous) }}
+
+                        <input type="text" id="adresse">
+                        <ul id="adresseliste">
+
+                        </ul>
+                        {{ form_row(form_vous) }}
+
+                        {{ form_end(form_vous) }}
                     </div>
-                    {#                    {{ form_row(form_vous.nom_secu) }} #}
+                    {#                                        {{ form_row(form_vous.adresse_vous) }} #}
 
                 {% elseif step==2 %}
 
                     <h2>L'entreprise d'accueil</h2>
+                    <p>Les champs marqués d'un * sont obligatoires</p>
 
                     <div {{ stimulus_controller('formulaire', {url:path('app_stimulus', {formulaire:formulaire.id})}) }}>
 
@@ -34,6 +44,7 @@
                 {% elseif step==3 %}
 
                     <h2>Le responsable de l'entreprise (Signataire de la convention)</h2>
+                    <p>Les champs marqués d'un * sont obligatoires</p>
 
                     <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_entreprise', {formulaire:formulaire.id})}) }}>
 
@@ -48,6 +59,7 @@
                 {% elseif step==4 %}
 
                     <h2>Le tuteur entreprise</h2>
+                    <p>Les champs marqués d'un * sont obligatoires</p>
 
                     <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_responsable', {formulaire:formulaire.id})}) }}>
 
@@ -62,6 +74,7 @@
                 {% elseif step==5 %}
 
                     <h2>Adresse du lieu où le stage sera effectué</h2>
+                    <p>Les champs marqués d'un * sont obligatoires</p>
 
                     <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_tuteur', {formulaire:formulaire.id})}) }}>
 
@@ -76,6 +89,7 @@
                 {% elseif step==6 %}
 
                     <h2>Le Stage</h2>
+                    <p>Les champs marqués d'un * sont obligatoires</p>
 
                     <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_adss_stage', {formulaire:formulaire.id})}) }}>
 
@@ -90,6 +104,7 @@
                 {% elseif step==7 %}
 
                     <h2>Le Stage</h2>
+                    <p>Les champs marqués d'un * sont obligatoires</p>
 
                     <div {{ stimulus_controller('formulaire', {url:path('app_stimulus_modal_stage', {formulaire:formulaire.id})}) }}>
 
@@ -113,6 +128,8 @@
 
     <script defer>
         window.addEventListener('load', () => {
+
+
             // if form_type_vous_cp_vous != focus -> var cp => valeur saisie : form_type_vous_cp_vous
             document.getElementById('form_type_vous_cp_vous').addEventListener('blur', (e) => {
                 let cp = e.currentTarget.value
@@ -126,15 +143,17 @@
                     .then((data) => {
                         // input "ville" = var ville
                         let ville = document.getElementById('form_type_vous_ville_vous')
-                        // options
+                        // var options = éléments html "option" de la liste déroulante
                         let options = document.querySelectorAll('#form_type_vous_ville_vous option')
+
                         options.forEach((option) => {
                             option.remove()
                         })
+
                         data.forEach(element => {
                             let opt1 = document.createElement("option")
                             opt1.text = element.nomCommune
-                            opt1.setAttribute('value', element.nomCommune)
+                            opt1.value = element.nomCommune
                             ville.append(opt1)
                             console.log(ville)
                             console.log(element.nomCommune)
@@ -142,28 +161,82 @@
                         ;
                     })
             })
-            // document.getElementById('form_type_vous_verif').addEventListener('click', (e) => {
-            //     let adss = document.getElementById('form_type_vous_adresse_vous').value
-            //     let cp = document.getElementById('form_type_vous_cp_vous').value
-            //     let ville = document.getElementById('form_type_vous_ville_vous').value
-            //     let adresse = adss + ' ' + cp + ' ' + ville;
-            //
-            //     fetch('https://api-adresse.data.gouv.fr/search/?q=' + adresse)
-            //         .then((data) => {
-            //             return data.json()
-            //         })
-            //         .then((data) => {
-            //             console.log(data)
-            //             // if (data === adresse) {
-            //             //     alert('Adresse valide')
-            //             //     // document.getElementById('form_type_vous_verif').className = 'btn btn-success'
-            //             // } else {
-            //             //     alert('Adresse invalide')
-            //             //     // document.getElementById('form_type_vous_verif').className = 'btn btn-danger'
-            //             // }
-            //         })
-            // })
-        })
+
+            document.getElementById('form_type_vous_verif').addEventListener('click', (e) => {
+                let adss = document.getElementById('form_type_vous_adresse_vous').value
+                let cp = document.getElementById('form_type_vous_cp_vous').value
+                let ville = document.getElementById('form_type_vous_ville_vous').value
+                let adresse = adss + ' ' + cp + ' ' + ville;
+
+                fetch('https://api-adresse.data.gouv.fr/search/?q=' + adresse)
+                    .then((data) => {
+                        return data.json()
+                    })
+                    .then((data) => {
+                        console.log(data)
+
+                        data.features.forEach(element => {
+                            console.log(element.properties.label)
+                        })
+
+                        // if (data.length === 0) {
+                        //     alert('Adresse invalide')
+                        //     // document.getElementById('form_type_vous_verif').className = 'btn btn-success'
+                        // } else {
+                        //     alert('Adresse valide')
+                        //     // document.getElementById('form_type_vous_verif').className = 'btn btn-danger'
+                        // }
+                    })
+            })
+
+            document.getElementById('adresse').addEventListener('keyup', (e) => {
+                let adresseSuite = e.currentTarget.value;
+
+                // On récupère l'api et on y injecte la saisie de l'utilisateur
+                fetch('https://api-adresse.data.gouv.fr/search/?q=' + adresseSuite + '&type=&autocomplete=1')
+                    //on l'injecte dans data et on la transforme en json
+                    .then((data) => {
+                        return data.json()
+                    })
+                    .then((data) => {
+                        console.log(data)
+
+                        let options = document.querySelectorAll('#adresseliste li')
+                        let adresseliste = document.getElementById('adresseliste')
+
+                        options.forEach((option) => {
+                            option.remove()
+                        })
+
+                        data.features.forEach(element => {
+                            console.log(element.properties.label)
+                            let autoCompleteOpt = document.createElement("li")
+                            autoCompleteOpt.innerHTML = element.properties.label
+                            autoCompleteOpt.dataset.name = element.properties.name
+                            autoCompleteOpt.dataset.city = element.properties.city
+                            autoCompleteOpt.dataset.postcode = element.properties.postcode
+                            autoCompleteOpt.classList.add('item')
+                            adresseliste.append(autoCompleteOpt)
+                        })
+                                document.querySelectorAll('.item').forEach((event) => {
+                                    event.addEventListener('click', (e) => {
+                                        console.log(e)
+                                        document.getElementById('form_type_vous_ville_vous').innerHTML = ''
+                                        let adresse = e.currentTarget
+                                        console.log('adresse' + adresse.dataset.city)
+                                        document.getElementById('form_type_vous_adresse_vous').value = adresse.dataset.name
+                                        document.getElementById('form_type_vous_cp_vous').value = adresse.dataset.postcode
+                                        // document.getElementById('form_type_vous_ville_vous').value = adresse.dataset.city
+                                        let opt1 = document.createElement("option")
+                                        opt1.text = adresse.dataset.city
+                                        opt1.value = adresse.dataset.city
+                                        document.getElementById('form_type_vous_ville_vous').append(opt1)
+
+                                    })
+                                })
+                    })
+                    })
+            })
 
     </script>
 
