@@ -9,82 +9,82 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class StimulusController extends AbstractController
 {
-    #[Route('/formulaire-test/vous/{formulaire}', name: 'app_stimulus')]
-    public function modal_vous(FormulaireRepository $FormulaireRepository, $formulaire)
+    #[Route('/formulaire-test/vous/{id}', name: 'app_stimulus')]
+    public function modal_vous(FormulaireRepository $StageEtudiantRepository, $id)
     {
 
-            $formulaire=$FormulaireRepository->find($formulaire);
+        $id = $StageEtudiantRepository->find($id);
 
 
-        return $this->render('formulaire/modal_vous.html.twig', ['test'=>$formulaire]);
+        return $this->render('formulaire/modal_vous.html.twig', ['id' => $id]);
     }
 
     //---------------------------------------------------------------------------
     //-----------------------------MODAL ENTREPRISE------------------------------
     //---------------------------------------------------------------------------
 
-    #[Route('/formulaire-test/entreprise/{formulaire}', name: 'app_stimulus_modal_entreprise')]
-    public function modal_entreprise(FormulaireRepository $FormulaireRepository, $formulaire)
+    #[Route('/formulaire-test/entreprise/{id}', name: 'app_stimulus_modal_entreprise')]
+    public function modal_entreprise(FormulaireRepository $StageEtudiantRepository, $id)
     {
 
-            $formulaire=$FormulaireRepository->find($formulaire);
+        $id = $StageEtudiantRepository->find($id);
 
 
-        return $this->render('formulaire/modal_entreprise.html.twig', ['test'=>$formulaire]);
+        return $this->render('formulaire/modal_entreprise.html.twig', ['id' => $id]);
     }
 
     //---------------------------------------------------------------------------
     //-----------------------------MODAL RESPONSABLE------------------------------
     //---------------------------------------------------------------------------
 
-    #[Route('/formulaire-test/responsable/{formulaire}', name: 'app_stimulus_modal_responsable')]
-    public function modal_responsable(FormulaireRepository $FormulaireRepository, $formulaire)
+    #[Route('/formulaire-test/responsable/{id}', name: 'app_stimulus_modal_responsable')]
+    public function modal_responsable(FormulaireRepository $StageEtudiantRepository, $id)
     {
 
-            $formulaire=$FormulaireRepository->find($formulaire);
+        $id = $StageEtudiantRepository->find($id);
 
 
-        return $this->render('formulaire/modal_responsable.html.twig', ['test'=>$formulaire]);
+        return $this->render('formulaire/modal_responsable.html.twig', ['id' => $id]);
     }
 
 //---------------------------------------------------------------------------
     //-----------------------------MODAL TUTEUR------------------------------
     //---------------------------------------------------------------------------
 
-    #[Route('/formulaire-test/tuteur/{formulaire}', name: 'app_stimulus_modal_tuteur')]
-    public function modal_tuteur(FormulaireRepository $FormulaireRepository, $formulaire)
+    #[Route('/formulaire-test/tuteur/{id}', name: 'app_stimulus_modal_tuteur')]
+    public function modal_tuteur(FormulaireRepository $StageEtudiantRepository, $id)
     {
 
-            $formulaire=$FormulaireRepository->find($formulaire);
+        $id = $StageEtudiantRepository->find($id);
 
 
-        return $this->render('formulaire/modal_tuteur.html.twig', ['test'=>$formulaire]);
+        return $this->render('formulaire/modal_tuteur.html.twig', ['id' => $id]);
     }
 //---------------------------------------------------------------------------
     //-----------------------------MODAL ADRESSE STAGE------------------------------
     //---------------------------------------------------------------------------
 
-    #[Route('/formulaire-test/adresse-stage/{formulaire}', name: 'app_stimulus_modal_adss_stage')]
-    public function modal_adresse_stage(FormulaireRepository $FormulaireRepository, $formulaire)
+    #[Route('/formulaire-test/adresse-stage/{id}', name: 'app_stimulus_modal_adss_stage')]
+    public function modal_adresse_stage(FormulaireRepository $StageEtudiantRepository, $id)
     {
 
-            $formulaire=$FormulaireRepository->find($formulaire);
+        $id = $StageEtudiantRepository->find($id);
 
 
-        return $this->render('formulaire/modal_adss_stage.html.twig', ['test'=>$formulaire]);
+        return $this->render('formulaire/modal_adss_stage.html.twig', ['id' => $id]);
     }
     //---------------------------------------------------------------------------
     //-----------------------------MODAL STAGE------------------------------
     //---------------------------------------------------------------------------
 
-    #[Route('/formulaire-test/stage/{formulaire}', name: 'app_stimulus_modal_stage')]
-    public function modal_stage(FormulaireRepository $FormulaireRepository, $formulaire)
+    #[Route('/formulaire-test/stage/{id}', name: 'app_stimulus_modal_stage')]
+    public function modal_stage(FormulaireRepository $StageEtudiantRepository, $id)
     {
 
-            $formulaire=$FormulaireRepository->find($formulaire);
+        $id = $StageEtudiantRepository->find($id);
 
 
-        return $this->render('formulaire/modal_stage.html.twig', ['test'=>$formulaire]);
+        return $this->render('formulaire/modal_stage.html.twig', ['id' => $id]);
     }
 
 }

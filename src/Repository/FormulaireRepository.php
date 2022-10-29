@@ -39,6 +39,18 @@ class FormulaireRepository extends ServiceEntityRepository
         }
     }
 
+    public function findLastId(): ?int
+    {
+        $query = $this->createQueryBuilder('formulaire')
+            ->select('formulaire.id')
+            ->orderBy('formulaire.id', 'DESC')
+            ->setMaxResults(1)
+            ->getQuery()
+        ;
+
+        return $query->getResult();
+    }
+
 //    /**
 //     * @return Formulaire[] Returns an array of Formulaire objects
 //     */

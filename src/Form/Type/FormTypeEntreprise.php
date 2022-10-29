@@ -3,17 +3,12 @@
 // src/Form/Type/Formype.php
 namespace App\Form\Type;
 
-use App\Entity\Formulaire;
-use Symfony\Component\Form\Extension\Core\Type\ButtonType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use App\Entity\StageEtudiant;
+use App\Form\EntrepriseType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\NotNull;
 
 Class FormTypeEntreprise extends AbstractType
 {
@@ -21,22 +16,17 @@ Class FormTypeEntreprise extends AbstractType
     {
         $builder
             //form_entreprise
-            ->add('raison_sociale', TextType::class, ['label' => 'Raison Sociale * :', 'help'=>'La raison sociale est le nom de l’entreprise ou de l’organisme', 'constraints' => [new NotBlank(message: 'Veuillez renseigner ce champ')]])
-            ->add('siret', NumberType::class, ['label' => 'N° SIRET :', 'help' => 'Le siret est obligatoire pour toutes les entreprises, sauf pour les organismes publics.' ,'required' => false])
-            ->add('adresse_entreprise', TextType::class, ['label' => 'Adresse (rue,numéro) * :', 'constraints' => [new NotBlank(message: 'Veuillez renseigner ce champ')]])
-            ->add('suite_adresse_entreprise', TextType::class, ['label' => 'Suite Adresse (étage, bâtiment...) :', 'required' => false])
-            ->add('complement_adresse_entreprise', TextType::class, ['label' => 'Complément d\'adressse :', 'required' => false])
-            ->add('cp_entreprise', TextType::class, ['label' => 'Code Postal * :', 'constraints' => [new NotNull(message: 'Veuillez renseigner ce champ')]])
-            ->add('ville_entreprise', ChoiceType::class, ['label' => 'Ville * :','choices' => [] ,'constraints' => [new NotBlank(message: 'Veuillez renseigner ce champ')]])
-            ->add('verif', ButtonType::class, ['label' => 'Vérifier l\'adresse', 'attr' => ['class' => 'btn btn-warning']])
+            ->add('entreprise', EntrepriseType::class, ['label' => 'Entreprise', 'required' => false])
+
             ->add('retour', SubmitType::class, ['label' => 'Etape précédente', ])
+
             ->add('suivant', SubmitType::class, ['label' => 'Etape suivante']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Formulaire::class,
+            'data_class' => StageEtudiant::class,
         ]);
     }
 }

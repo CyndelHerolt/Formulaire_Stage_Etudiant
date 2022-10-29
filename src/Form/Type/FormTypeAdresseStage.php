@@ -3,7 +3,10 @@
 // src/Form/Type/Formype.php
 namespace App\Form\Type;
 
-use App\Entity\Formulaire;
+use App\Entity\StageEtudiant;
+use App\Form\AdresseType;
+use App\Form\EntrepriseType;
+use Symfony\Component\Form\Extension\Core\Type\ButtonType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -19,12 +22,8 @@ Class FormTypeAdresseStage extends AbstractType
     {
         $builder
             //form_adresse_stage
-            ->add('recup_informations', SubmitType::class, ['label' => 'Récupérer informations', 'validate'=>false])
-            ->add('adresse_stage', TextType::class, ['label' => 'Adresse (numéro, rue) * :', 'constraints' => [new NotBlank(['message' => 'Veuillez renseigner ce champ'])]])
-            ->add('suite_adresse_stage', TextType::class, ['label' => 'Suite adresse (étage, bâtiment, ...) :', 'required' => false])
-            ->add('complement_adresse_stage', TextType::class, ['label' => 'Complément d’adresse :', 'required' => false])
-            ->add('cp_stage', ChoiceType::class, ['label' => 'Code Postal * :', 'choices' => ['API' => 'API'], 'constraints' => [new NotNull(['message' => 'Veuillez renseigner ce champ'])]])
-            ->add('ville_stage', TextType::class, ['label' => 'Ville * :', 'constraints' => [new NotBlank(['message' => 'Veuillez renseigner ce champ'])]])
+            ->add('recup_informations', SubmitType::class, ['label' => 'Récupérer informations', 'attr' => ['class' => 'btn btn-primary']])
+            ->add('adresse_stage', AdresseType::class, ['label' => 'Adresse du stage', 'required' => false, 'constraints' => [new NotBlank(['message' => 'Veuillez renseigner une adresse'])]])
             ->add('retour', SubmitType::class, ['label' => 'Etape précédente'])
             ->add('suivant', SubmitType::class, ['label' => 'Etape suivante']);
     }
@@ -32,7 +31,7 @@ Class FormTypeAdresseStage extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Formulaire::class,
+            'data_class' => StageEtudiant::class,
         ]);
     }
 }

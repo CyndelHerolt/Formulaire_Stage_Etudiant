@@ -10,7 +10,7 @@
 $dropdown-link-hover-color:         var(--policeDark);
 $dropdown-link-hover-bg:            var(--colorIUT);
 
-@import "~bootstrap/scss/bootstrap";
+//@import "~bootstrap/scss/bootstrap";
 
 
 
@@ -18,8 +18,8 @@ $dropdown-link-hover-bg:            var(--colorIUT);
 @import "./_layout.scss";
 @import "./color.scss";
 @import "./apc.scss";
-@import "./_toolbar.scss";
-@import "./_edt.scss";
+//@import "./_toolbar.scss";
+//@import "./_edt.scss";
 //@import "perfect-scrollbar.css";
 
 // FlatPickr
@@ -795,22 +795,4 @@ td.bg-disabled {
 
 .col-odd {
   background-color: #eaeaea !important;
-}
-
-//.nav-tabs .nav-link {
-//  color: var(--policeDark)
-//}
-
-
-//----------------------------------------------------------------TEST----------------------------------------------------------------
-.card-body {
-  background-color: var(--body);
-
-
-  .form_rows {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
 }

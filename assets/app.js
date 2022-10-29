@@ -13,3 +13,5 @@ import './bootstrap';
 
 import * as bootstrap from 'bootstrap'
 import './css/app.scss'
+
+import $ from 'jquery'
