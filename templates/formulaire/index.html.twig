@@ -43,13 +43,15 @@
                     <div class="form_rows">
                         {{ form_start(form_vous) }}
 
+                        {{ form_errors(form_vous) }}
+
                         {{ form_row(form_vous.etudiant.intituleSecuriteSociale) }}
                         {{ form_row(form_vous.etudiant.adresseSecuriteSociale) }}
 
 
                         <div class="form-group">
                             <label for="adresse" class="form-label">Votre adresse :</label> <br>
-                            <input type="text" id="adresse" class="form-control">
+                            <input type="text" id="adresse" class="form-control" autocomplete="off">
                             <ul id="adresseliste">
                             </ul>
 
@@ -635,13 +637,20 @@
                     <p>Les champs marqués d'un * sont obligatoires</p>
 
                     <div {{ stimulus_controller('id', {url:path('app_stimulus_modal_tuteur', {id:id.id})}) }}>
+                        {{ form_start(form_adss_stage) }}
                         {{ form_row(form_adss_stage.recup_informations) }}
                         <div data-formulaire-target="connect">
                             <label for="adresseStage" class="form-label">Votre adresse :</label> <br>
                             <input type="text" id="adresseStage" class="form-control">
                             <ul id="adresselisteStage">
                             </ul>
-                            {{ form(form_adss_stage) }}
+                            {{ form(form_adss_stage.adresse_stage) }}
+
+                            <div class="adss_entreprise" style="display: none">
+                                {{ form(form_adss_stage.entreprise) }}
+                            </div>
+
+                            {{ form_end(form_adss_stage) }}
                         </div>
 
                         {{ include('_modal.html.twig', {
@@ -804,9 +813,25 @@
                                         window.location.href = data.route;
                                     })
                             })
+
+                            //---------------------------------------------------------------------------
+                            //--------------------------RECUP DATA ENTREPRISE----------------------------
+                            //---------------------------------------------------------------------------
+
+                            const formElemAdresseStage = document.forms['form_type_adresse_stage']
+                            document.getElementById('form_type_adresse_stage_recup_informations').addEventListener('click', async (e) => {
+
+                                document.getElementById('form_type_adresse_stage_adresse_stage_adresse1').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_adresse1').value; //on ajoute un élément dans le formulaire en récupérant les données d'un champ
+                                document.getElementById('form_type_adresse_stage_adresse_stage_adresse2').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_adresse2').value;
+                                document.getElementById('form_type_adresse_stage_adresse_stage_adresse3').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_adresse3').value;
+                                document.getElementById('form_type_adresse_stage_adresse_stage_code_postal').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_code_postal').value;
+                                document.getElementById('form_type_adresse_stage_adresse_stage_ville').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_code_postal_ville').value;
+                            })
                         })
 
+
                     </script>
+
 
                     {% elseif step==6 %}
 
@@ -851,16 +876,16 @@
                     </div>
                     <script defer type="text/javascript">
                         window.addEventListener('load', () => {
-                                // $('.js-datepicker').datepicker({
-                                //     format: 'dd/mm/yyyy',
-                                //     language: 'fr',
-                                //     autoclose: true,
-                                //     todayHighlight: true,
-                                //     startDate: "01/01/2022",
-                                //     orientation: "top auto",
-                                //     daysOfWeekDisabled: "5,6",
-                                //     minViewMode: 31,
-                                // });
+                            // $('.js-datepicker').datepicker({
+                            //     format: 'dd/mm/yyyy',
+                            //     language: 'fr',
+                            //     autoclose: true,
+                            //     todayHighlight: true,
+                            //     startDate: "01/01/2022",
+                            //     orientation: "top auto",
+                            //     daysOfWeekDisabled: "5,6",
+                            //     minViewMode: 31,
+                            // });
 
                             {#                            //------------------------------------------------------------------------------ -#}
                             {#                            //-----------------------CALC NBR JOURS----------------------------------------- -#}
@@ -883,7 +908,19 @@
                                         document.getElementById('form_type_stage_duree_jours_stage').value = data.duree
                                     })
                             })
+
+                            // document.getElementById('form_type_stage_date_fin_stage').addEventListener('change', (e) => {
+                            //     let interval = document.getElementById('form_type_stage_duree_jours_stage')
+                            //     let gratification = document.getElementById('form_type_stage_gratification')
+                            //             if (interval.value >= 40) {
+                            //                 gratification.value = 'oui'
+                            //             } else {
+                            //                 gratification.value = 'non'
+                            //             }
+                            // })
+
                         })
+
                         //
                         // let date1 = new Date(dateDebutStage)
                         // let date2 = new Date(dateFinStage)
@@ -903,7 +940,7 @@
                         // // console.log(days_difference)
                         //
                         // document.getElementById('form_type_stage_duree_jours_stage').value = days_difference
-                        // })
+                        // }})
 
                         //---------------------------------------------GRATIF OBLIGATOIRE---------------------------------------------
                         // -----------------------------------------------------------------------------------------------------------

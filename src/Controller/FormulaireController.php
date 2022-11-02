@@ -178,6 +178,10 @@ class FormulaireController extends AbstractController
 
         $form5 = $this->createForm(FormTypeAdresseStage::class, $id);
 
+        if ($request->request->get('button') == 'form_type_adresse_stage_recup_informations') {
+            $id->setAdresseStage($id->getEntreprise()->getAdresse());
+        }
+
         $form5->handleRequest($request);
         if ($form5->isSubmitted()) {
 
@@ -186,16 +190,11 @@ class FormulaireController extends AbstractController
 
                 if ($request->request->get('button') == 'form_type_adresse_stage_suivant') {
                     return $this->json(['route' => $this->generateUrl('app_formulaireStage', ['id' => $id->getId()])]);
-                } elseif ($form5->get('retour')->isClicked()) {
+                } elseif ($request->request->get('button') == 'form_type_adresse_stage_retour') {
                     return $this->json(['route' => $this->generateUrl('app_formulaireTuteur', ['id' => $id->getId()])]);
                 }
-//                elseif ($form5->get('recup_informations')->isClicked()) {
-//                    return $this->json([$id->setAdresseStage($id->getEntreprise()->getAdresse()), $this->createForm(FormTypeAdresseStage::class,[$form5 ,$id])]);
-//                }
             }
-
         }
-
         return $this->renderForm('formulaire/index.html.twig', ['form_adss_stage' => $form5, 'step' => 5, 'id' => $id]);
     }
 
@@ -278,15 +277,14 @@ class FormulaireController extends AbstractController
         while ($date_debut <= $date_fin) {
             if (in_array($date_debut->format('Y-m-d'), $tabFeries, true)) {
                 $interval--;
-            }
-            elseif ($date_debut->format('l') == 'Saturday' || $date_debut->format('l') == 'Sunday') {
+            } elseif ($date_debut->format('l') == 'Saturday' || $date_debut->format('l') == 'Sunday') {
                 $interval--;
             }
             $date_debut->add(new \DateInterval('P1D'));
-
         }
         return $this->json(['duree' => $interval]);
     }
+
 }
 
 
