@@ -21,15 +21,15 @@ class EtudiantType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('intituleSecuriteSociale', TextType::class, ['label' => 'Organisme de sécurité sociale * :', 'attr' => ['for' => 'nom de l\'organisme de sécurité soiale'], 'help' => 'Indiquer "CPAM" pour le régime de sécurité social général ou le nom de votre régime spécial (ou celui de vos parents).', 'required' => false, 'constraints' => [new NotBlank(message: 'Veuillez renseigner ce champ')]])
+            ->add('intituleSecuriteSociale', TextType::class, ['label' => 'Organisme de sécurité sociale * :', 'attr' => ['for' => 'nom de l\'organisme de sécurité soiale', 'autocomplete'=>'off'], 'help' => 'Indiquer "CPAM" pour le régime de sécurité social général ou le nom de votre régime spécial (ou celui de vos parents).','constraints' => [new NotBlank(message: 'Veuillez renseigner ce champ')]])
 
-            ->add('adresseSecuriteSociale', TextType::class, ['label' => 'Adresse de l\'organisme :', 'attr' => ['for' => 'adresse de l\'organisme de sécurité soiale'], 'help' => 'Uniquement si vous n\'êtes pas au régime général de la sécurité sociale.', 'required' => false])
+            ->add('adresseSecuriteSociale', TextType::class, ['label' => 'Adresse de l\'organisme :', 'attr' => ['for' => 'adresse de l\'organisme de sécurité soiale', 'autocomplete'=>'off'], 'help' => 'Uniquement si vous n\'êtes pas au régime général de la sécurité sociale.', 'required' => false])
 
-            ->add('adresseEtudiant', AdresseType::class, ['label' => 'Récapitulatif', 'required' => false])
+            ->add('adresseEtudiant', AdresseType::class, ['label' => 'Récapitulatif'])
 
-            ->add('mailPerso', EmailType::class, ['label' => 'Votre email personnel * :', 'help' => 'l\'email doit être saisi sous la forme : xxxxxx@xxx.xxx.', 'required' => false, 'constraints' => [new NotBlank(message: 'Veuillez renseigner ce champ'), new Email(message: 'Veuiilez renseigner un email valide')]])
+            ->add('mailPerso', EmailType::class, ['label' => 'Votre email personnel :', 'help' => 'l\'email doit être saisi sous la forme : xxxxxx@xxx.xxx.', 'attr' => ['autocomplete'=>'off'], 'constraints' => [new NotBlank(message: 'Veuillez renseigner ce champ'), new Email(message: 'Veuillez renseigner un email valide')]])
 
-            ->add('tel2', TextType::class, ['label' => 'Votre numéro de téléphone * :', 'help' => 'le numéro de téléphone doit comporter 10 chiffres.', 'required' => false, 'constraints' => [new NotNull(message: 'Veuillez renseigner ce champ'), new Length(['min' => 10, 'max' => 10, 'exactMessage' => 'Le numéro de téléphone doit comporter 10 chiffres'])]]);
+            ->add('tel2', TextType::class, ['label' => 'Votre numéro de téléphone :', 'help' => 'le numéro de téléphone doit comporter 10 chiffres.', 'attr' => ['autocomplete'=>'off'],'constraints' => [new NotNull(message: 'Veuillez renseigner ce champ'), new Length(['min' => 10, 'max' => 10, 'exactMessage' => 'Le numéro de téléphone doit comporter 10 chiffres'])]]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

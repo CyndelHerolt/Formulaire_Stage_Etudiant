@@ -20,17 +20,17 @@ class TuteurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('prenom', TextType::class, ['label' => 'Prénom * :'])
+            ->add('prenom', TextType::class, ['label' => 'Prénom * :', 'attr' => ['autocomplete'=>'off']])
 
-            ->add('nom', TextType::class, ['label' => 'Nom * :'])
+            ->add('nom', TextType::class, ['label' => 'Nom * :', 'attr' => ['autocomplete'=>'off']])
 
-            ->add('fonction', TextType::class, ['label' => 'Fonction dans l\'entreprise * :'])
+            ->add('fonction', TextType::class, ['label' => 'Fonction dans l\'entreprise * :', 'attr' => ['autocomplete'=>'off']])
 
-            ->add('email', EmailType::class, ['label' => 'Email :', 'required' => false, 'constraints' => [new NotBlank(message: 'Veuillez renseigner ce champ'), new Email(message: 'Veuiilez renseigner un email valide')]])
+            ->add('email', EmailType::class, ['label' => 'Email :', 'required' => false, 'constraints' => [new NotBlank(message: 'Veuillez renseigner ce champ'), new Email(message: 'Veuiilez renseigner un email valide')], 'attr' => ['autocomplete'=>'off']])
 
-            ->add('telephone', IntegerType::class, ['label' => 'Téléphone :', 'required' => false])
+            ->add('telephone', IntegerType::class, ['label' => 'Téléphone :', 'required' => false, 'attr' => ['autocomplete'=>'off']])
 
-            ->add('portable', IntegerType::class, ['label' => 'Portable * :']);
+            ->add('portable', IntegerType::class, ['label' => 'Portable * :', 'attr' => ['autocomplete'=>'off']]);
 
     }
 

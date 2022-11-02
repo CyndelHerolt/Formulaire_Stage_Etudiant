@@ -28,33 +28,33 @@ class FormTypeStage extends AbstractType
     {
         $builder
             //form_adresse_stage
-            ->add('date_debtut_stage', DateType::class, ['label' => 'Date de début :', 'widget' => 'single_text', 'attr' => ['class' => 'datepicker form-control'], 'help' => 'La date doit être saisie au format "jj/mm/aaaa"'])
+            ->add('date_debtut_stage', DateType::class, ['label' => 'Date de début :','help' => 'La date doit être saisie au format "jj/mm/aaaa"','attr' => ['autocomplete'=>'off'], 'widget' => 'single_text'/*, 'html5' => false, 'format' => 'l/dd/MM/yyyy', , 'attr' => ['class' => 'js-datepicker']*/])
 
-            ->add('date_fin_stage', DateType::class, ['label' => 'Date de fin  :', 'widget' => 'single_text', 'attr' => ['class' => 'datepicker'], 'help' => 'La date doit être saisie au format "jj/mm/aaaa"'])
+            ->add('date_fin_stage', DateType::class, ['label' => 'Date de fin  :', 'help' => 'La date doit être saisie au format "jj/mm/aaaa"','attr' => ['autocomplete'=>'off'] ,'widget' => 'single_text',/* 'attr' => ['class' => 'datepicker']*/])
 
-            ->add('duree_jours_stage', IntegerType::class, ['label' => 'Nombre de jours de stage :', 'help' => 'En jours ouvrés (hors week-end et jours fériés)'])
+            ->add('duree_jours_stage', IntegerType::class, ['label' => 'Nombre de jours de stage :', 'help' => 'En jours ouvrés (hors week-end et jours fériés)', 'attr' => ['autocomplete'=>'off']])
 
-            ->add('service_stage_entreprise', TextType::class, ['label' => 'Service dans l\'entreprise :', 'help' => 'Service dans lequel vous effectuerez votre stage', 'required' => false])
+            ->add('service_stage_entreprise', TextType::class, ['label' => 'Service dans l\'entreprise :', 'help' => 'Service dans lequel vous effectuerez votre stage','attr' => ['autocomplete'=>'off'] ,'required' => false])
 
-            ->add('sujet_stage', TextareaType::class, ['label' => 'Mission principale :'])
+            ->add('sujet_stage', TextareaType::class, ['label' => 'Mission principale :', 'attr' => ['autocomplete'=>'off']])
 
-            ->add('activites', TextareaType::class, ['label' => 'Activités à réaliser :', 'help' => 'Décrivez les missions qui vous seront confiées'])
+            ->add('activites', TextareaType::class, ['label' => 'Activités à réaliser :', 'help' => 'Décrivez les missions qui vous seront confiées', 'attr' => ['autocomplete'=>'off']])
 
-            ->add('periodes_interruptions', TextType::class, ['label' => 'Périodes d\'interruptions :', 'help' => 'En complément des périodes déjà prévues', 'required' => false])
+            ->add('periodes_interruptions', TextType::class, ['label' => 'Périodes d\'interruptions :', 'help' => 'En complément des périodes déjà prévues', 'attr' => ['autocomplete'=>'off'],'required' => false])
 
-            ->add('duree_hebdomadaire', NumberType::class, ['label' => 'Durée de travail hebdomadaire :', 'constraints' => [new NotNull(['message' => 'Veuillez renseigner ce champ'])]])
+            ->add('duree_hebdomadaire', NumberType::class, ['label' => 'Durée de travail hebdomadaire :', 'attr' => ['autocomplete'=>'off'],'constraints' => [new NotNull(['message' => 'Veuillez renseigner ce champ'])]])
 
-            ->add('commentaire_duree_hebdomadaire', TextareaType::class, ['label' => 'Commentaires sur la durée du travail :', 'help' => 'Toutes précisions nécessaires sur la durée de travail', 'required' => false])
+            ->add('commentaire_duree_hebdomadaire', TextareaType::class, ['label' => 'Commentaires sur la durée du travail :', 'help' => 'Toutes précisions nécessaires sur la durée de travail', 'attr' => ['autocomplete'=>'off'],'required' => false])
 
-            ->add('amenagement_stagec', TextareaType::class, ['label' => 'Aménagement du stage :', 'help' => 'Aménagement du temps de travail par exemple (travail de nuit, déplacements, télétravail...)', 'required' => false])
+            ->add('amenagement_stagec', TextareaType::class, ['label' => 'Aménagement du stage :', 'help' => 'Aménagement du temps de travail par exemple (travail de nuit, déplacements, télétravail...)','attr' => ['autocomplete'=>'off'], 'required' => false])
 
             ->add('gratification', ChoiceType::class, ['label' => 'Gratification :', 'choices' => ['oui' => 'oui', 'non' => 'non'], 'expanded' => true, 'help' => 'Le stage sera-t-il rémunéré ?'])
 
-            ->add('gratification_periode', ChoiceType::class, ['label' => 'Période de gratification :', 'choices' => ['Heure' => 'h', 'Jour' => 'j', 'Mois' => 'm'], 'expanded' => true, 'help' => 'Choisissez la période de calcul de la gratification'])
+            ->add('gratification_periode', ChoiceType::class, ['label' => 'Période de gratification :', 'choices' => ['Heure' => 'h', 'Jour' => 'j', 'Mois' => 'm'], 'expanded' => true, 'help' => 'Choisissez la période de calcul de la gratification', 'attr' => ['autocomplete'=>'off']])
 
-            ->add('gratification_montant', NumberType::class, ['label' => 'Montant de la gratification :', 'help' => 'En fonction de la période sélectionnée'])
+            ->add('gratification_montant', NumberType::class, ['label' => 'Montant de la gratification :', 'help' => 'En fonction de la période sélectionnée', 'attr' => ['autocomplete'=>'off']])
 
-            ->add('avantages', TextareaType::class, ['label' => 'Avantages :', 'help' => 'Autres avantages (frais de transports, ...)', 'required' => false])
+            ->add('avantages', TextareaType::class, ['label' => 'Avantages :', 'help' => 'Autres avantages (frais de transports, ...)', 'attr' => ['autocomplete'=>'off'],'required' => false])
 
             ->add('retour', SubmitType::class, ['label' => 'Etape précédente'])
 
