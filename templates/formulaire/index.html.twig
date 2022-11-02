@@ -796,7 +796,6 @@
                                     method: 'POST', //méthode en post (on pourrait dire aussi formElemAdssStage.method)
                                     body: formData, //on passe les données avec l'objet créé plus haut
                                 })
-
                                     .then((data) => {
                                         return data.json()
                                     })
@@ -805,22 +804,6 @@
                                         window.location.href = data.route;
                                     })
                             })
-
-                            //---------------------------------------------------------------------------
-                            //-----------------------------RECUP INFOS-----------------------------------
-                            // const formElemAdssEntreprise = document.forms['form_type_entreprise'] //récupération du formulaire, par son name
-                            //
-                            // document.getElementById('form_type_adresse_stage_recup_informations').onclick = function () {
-                            //     console.log('test')
-                            //     const formData = new FormData(formElemAdssStage) //on construit un objet formData avec les éléments du formulaire
-                            //     formData.set('form_type_adresse_stage[adresse_stage][adresse1]', document.getElementById('form_type_entreprise_entreprise_adresse_adresse1').value);
-                            //     formData.set('form_type_adresse_stage[adresse_stage][adresse2]', document.getElementById('form_type_entreprise_entreprise_adresse_adresse2').value);
-                            //     formData.set('form_type_adresse_stage[adresse_stage][adresse3]', document.getElementById('form_type_entreprise_entreprise_adresse_adresse3').value);
-                            //     formData.set('form_type_adresse_stage[adresse_stage][code_postal]', document.getElementById('form_type_entreprise_entreprise_adresse_code_postal').value);
-                            //     formData.set('form_type_adresse_stage[adresse_stage][ville]', document.getElementById('form_type_entreprise_entreprise_adresse_ville').value);
-                            //
-                            //     console.log(formData.get('form_type_adresse_stage[adresse_stage][adresse1]')) //pour tester que ca fonctionne
-                            // }
                         })
 
                     </script>
@@ -868,24 +851,22 @@
                     </div>
                     <script defer type="text/javascript">
                         window.addEventListener('load', () => {
-                            // $(document).ready(function () {
-                            //     $('.datepicker').datepicker({
-                            //         format: 'dd/mm/yyyy',
-                            //         language: 'fr',
-                            //         autoclose: true,
-                            //         todayHighlight: true,
-                            //         startDate: "01/01/2022",
-                            //         orientation: "top auto",
-                            //         daysOfWeekDisabled: "5,6",
-                            //         minViewMode: 31,
-                            //     });
-                            // });
+                                // $('.js-datepicker').datepicker({
+                                //     format: 'dd/mm/yyyy',
+                                //     language: 'fr',
+                                //     autoclose: true,
+                                //     todayHighlight: true,
+                                //     startDate: "01/01/2022",
+                                //     orientation: "top auto",
+                                //     daysOfWeekDisabled: "5,6",
+                                //     minViewMode: 31,
+                                // });
 
                             {#                            //------------------------------------------------------------------------------ -#}
                             {#                            //-----------------------CALC NBR JOURS----------------------------------------- -#}
 
                             document.getElementById('form_type_stage_date_fin_stage').addEventListener('change', (e) => {
-                                let dateDebutStage = document.getElementById('form_type_stage_date_debut_stage').value
+                                let dateDebutStage = document.getElementById('form_type_stage_date_debtut_stage').value
                                 let dateFinStage = document.getElementById('form_type_stage_date_fin_stage').value
 
                                 fetch('{{ path('calendar') }}', {
@@ -893,6 +874,8 @@
                                     body: JSON.stringify({date1: dateDebutStage, date2: dateFinStage})
                                 })
                                     .then((data) => {
+                                        console.log(dateDebutStage)
+
                                         return data.json()
                                     })
                                     .then((data) => {

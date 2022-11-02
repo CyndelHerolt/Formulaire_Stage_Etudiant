@@ -17,7 +17,7 @@ Class FormTypeAdresseStage extends AbstractType
     {
         $builder
             //form_adresse_stage
-            ->add('recup_informations', SubmitType::class, ['label' => 'Récupérer informations', 'attr' => ['class' => 'btn btn-primary']])
+            ->add('recup_informations', SubmitType::class, ['label' => 'Récupérer informations', 'attr' => ['class' => 'btn btn-primary'], 'validate' => false])
             ->add('adresse_stage', AdresseType::class, ['label' => 'Adresse du stage', 'required' => false, 'constraints' => [new NotBlank(['message' => 'Veuillez renseigner une adresse'])]])
             ->add('retour', SubmitType::class, ['label' => 'Etape précédente'])
             ->add('suivant', SubmitType::class, ['label' => 'Etape suivante']);

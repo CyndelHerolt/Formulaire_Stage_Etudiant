@@ -190,8 +190,7 @@ class FormulaireController extends AbstractController
                     return $this->json(['route' => $this->generateUrl('app_formulaireTuteur', ['id' => $id->getId()])]);
                 }
 //                elseif ($form5->get('recup_informations')->isClicked()) {
-//                    $id->setAdresseStage($id->getEntreprise()->getAdresse());
-//                    $form5 = $this->createForm(FormTypeAdresseStage::class, $id);
+//                    return $this->json([$id->setAdresseStage($id->getEntreprise()->getAdresse()), $this->createForm(FormTypeAdresseStage::class,[$form5 ,$id])]);
 //                }
             }
 
@@ -202,7 +201,7 @@ class FormulaireController extends AbstractController
 
 
     #[Route('/formulaire/stage/{id}', name: 'app_formulaireStage')]
-    public function new_form_stage(Request $request, StageEtudiantRepository $StageEtudiantRepository, $id, FormTypeStage $formTypeStage): Response
+    public function new_form_stage(Request $request, StageEtudiantRepository $StageEtudiantRepository, $id): Response
     {
         $id = $StageEtudiantRepository->find($id);
 
@@ -230,8 +229,8 @@ class FormulaireController extends AbstractController
     public function calculJoursDeStage(Request $request)
     {
         $tab = json_decode($request->getContent(), true);
-        $date_debut = $request->request->get('date1');
-        $date_fin = $request->request->get('date2');
+//        $date_debut = $request->request->get('date1');
+//        $date_fin = $request->request->get('date2');
         $date_debut = new \DateTime($tab['date1']);
         $date_fin = new \DateTime($tab['date2']);
         $interval = $date_debut->diff($date_fin);
@@ -280,7 +279,11 @@ class FormulaireController extends AbstractController
             if (in_array($date_debut->format('Y-m-d'), $tabFeries, true)) {
                 $interval--;
             }
+            elseif ($date_debut->format('l') == 'Saturday' || $date_debut->format('l') == 'Sunday') {
+                $interval--;
+            }
             $date_debut->add(new \DateInterval('P1D'));
+
         }
         return $this->json(['duree' => $interval]);
     }
