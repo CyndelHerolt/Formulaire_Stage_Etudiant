@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Adresse;
+use App\Entity\StageEtudiant;
+use App\Repository\AdresseRepository;
 use App\Repository\StageEtudiantRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ButtonType;
@@ -24,20 +26,19 @@ class AdresseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('adresse1', TextType::class, ['label' => 'Adresse (numéro, rue) * :', 'required' => false, 'disabled' => true, 'attr' => ['autocomplete'=>'off']])
-
-            ->add('adresse2', TextType::class, ['label' => 'Suite adresse (étage, bâtiment, ...) :', 'required' => false, 'attr' => ['autocomplete'=>'off']])
-
-            ->add('adresse3', TextType::class, ['label' => 'Complément d’adresse :', 'required' => false, 'attr' => ['autocomplete'=>'off']])
-
-            ->add('code_postal', TextType::class, ['label' => 'Code Postal * :','disabled' => true, 'help' => 'Uniquement le code postal, sans autre mention (cedex, ...)', 'required' => false, 'attr' => ['autocomplete'=>'off']])
-
-            ->add('ville', ChoiceType::class, ['label' => 'Ville * :','disabled' => true, 'attr' => ['autocomplete'=>'off']])
+            ->add('adresse1', TextType::class, ['label' => 'Adresse (numéro, rue) * :', 'required' => false, 'disabled' => true, 'attr' => ['autocomplete' => 'off']])
+            ->add('adresse2', TextType::class, ['label' => 'Suite adresse (étage, bâtiment, ...) :', 'required' => false, 'attr' => ['autocomplete' => 'off']])
+            ->add('adresse3', TextType::class, ['label' => 'Complément d’adresse :', 'required' => false, 'attr' => ['autocomplete' => 'off']])
+            ->add('code_postal', TextType::class, ['label' => 'Code Postal * :', 'disabled' => true, 'help' => 'Uniquement le code postal, sans autre mention (cedex, ...)', 'required' => false, 'attr' => ['autocomplete' => 'off']])
+            ->add('ville', ChoiceType::class, ['label' => 'Ville * :', 'disabled' => true, 'attr' => ['autocomplete' => 'off']])
             ->addEventListener(
                 FormEvents::PRE_SUBMIT,
                 [$this, 'onPreSubmit']
             )
-
+            ->addEventListener(
+                FormEvents::PRE_SET_DATA,
+                [$this, 'onPreSetData']
+            )
             ->add('verif_adresse', ButtonType::class, ['label' => 'Vérifier l\'adresse', 'attr' => ['class' => 'btn btn-warning']]);
 
 //            ->add('pays', TextType::class, ['label' => 'label.pays', 'required' => false, 'data' => 'France', 'attr' => ['maxlength' => 100]]);
@@ -48,25 +49,37 @@ class AdresseType extends AbstractType
         if (null === $event->getData()) {
             return;
         }
-        if (array_key_exists('adresse1', $event -> getData())) {
+        if (array_key_exists('adresse1', $event->getData())) {
             $input = $event->getData()['adresse1'];
             $event->getForm()->add('adresse1', TextType::class, ['empty_data' => $input]);
         }
-        if (array_key_exists('adresse2', $event -> getData())) {
+        if (array_key_exists('adresse2', $event->getData())) {
             $input = $event->getData()['adresse2'];
             $event->getForm()->add('adresse2', TextType::class, ['empty_data' => $input]);
         }
-        if (array_key_exists('adresse3', $event -> getData())) {
+        if (array_key_exists('adresse3', $event->getData())) {
             $input = $event->getData()['adresse3'];
             $event->getForm()->add('adresse3', TextType::class, ['empty_data' => $input]);
         }
-        if (array_key_exists('code_postal', $event -> getData())) {
+        if (array_key_exists('code_postal', $event->getData())) {
             $input = $event->getData()['code_postal'];
             $event->getForm()->add('code_postal', TextType::class, ['empty_data' => $input]);
         }
-        if (array_key_exists('ville', $event -> getData())) {
+        if (array_key_exists('ville', $event->getData())) {
             $input = $event->getData()['ville'];
             $event->getForm()->add('ville', ChoiceType::class, ['choices' => [$input]]);
+        }
+    }
+
+    public function onPreSetData(FormEvent $event)
+    {
+        $ville = $event->getData();
+        $form = $event->getForm();
+        if (null !== $ville) {
+            $form->add('ville', ChoiceType::class, [
+                'choices' => [$ville->getVille() => $ville->getVille()],
+                'disabled' => true
+            ]);
         }
     }
 

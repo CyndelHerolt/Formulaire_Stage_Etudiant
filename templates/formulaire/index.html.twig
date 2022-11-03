@@ -825,7 +825,14 @@
                                 document.getElementById('form_type_adresse_stage_adresse_stage_adresse2').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_adresse2').value;
                                 document.getElementById('form_type_adresse_stage_adresse_stage_adresse3').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_adresse3').value;
                                 document.getElementById('form_type_adresse_stage_adresse_stage_code_postal').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_code_postal').value;
-                                document.getElementById('form_type_adresse_stage_adresse_stage_ville').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_ville').value;
+                                // document.getElementById('form_type_adresse_stage_adresse_stage_ville').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_ville').value;
+
+                                let opt = document.createElement("option");
+                                document.getElementById('form_type_adresse_stage_adresse_stage_ville').innerHTML = ''
+                                opt.text = document.getElementById('form_type_adresse_stage_entreprise_adresse_ville').value
+                                opt.value = document.getElementById('form_type_adresse_stage_entreprise_adresse_ville').value
+                                console.log(opt)
+                                document.getElementById('form_type_adresse_stage_adresse_stage_ville').append(opt)
                             })
                         })
 
