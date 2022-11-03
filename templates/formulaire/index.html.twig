@@ -788,7 +788,7 @@
                             formElemAdssStage.addEventListener('submit', async (e) => { //on détecte lorsque le formulaire est soumis
                                 e.preventDefault() //on empèche qu'il soit envoyé
                                 const formData = new FormData(formElemAdssStage) //on construit un objet formData avec les éléments du formulaire
-                                formData.set('form_type_adresse_stage[adresse_stage][adresse1]', document.getElementById('form_type_adresse_stage_adresse_stage_adresse1').value); //on ajoute un élément dans le formulaire en récupérant les données d'un champs disabled
+                                formData.set('form_type_adresse_stage[adresse_stage][adresse1]', document.getElementById('form_type_adresse_stage_adresse_stage_adresse1').value); //on ajoute un élément dans le formulaire en récupérant les données d'un champ disabled
 
                                 formData.set('form_type_adresse_stage[adresse_stage][code_postal]', document.getElementById('form_type_adresse_stage_adresse_stage_code_postal').value);
 
@@ -825,7 +825,7 @@
                                 document.getElementById('form_type_adresse_stage_adresse_stage_adresse2').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_adresse2').value;
                                 document.getElementById('form_type_adresse_stage_adresse_stage_adresse3').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_adresse3').value;
                                 document.getElementById('form_type_adresse_stage_adresse_stage_code_postal').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_code_postal').value;
-                                document.getElementById('form_type_adresse_stage_adresse_stage_ville').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_code_postal_ville').value;
+                                document.getElementById('form_type_adresse_stage_adresse_stage_ville').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_ville').value;
                             })
                         })
 

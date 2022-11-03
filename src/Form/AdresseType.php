@@ -30,9 +30,9 @@ class AdresseType extends AbstractType
 
             ->add('adresse3', TextType::class, ['label' => 'Complément d’adresse :', 'required' => false, 'attr' => ['autocomplete'=>'off']])
 
-            ->add('code_postal', TextType::class, ['label' => 'Code Postal * :', 'help' => 'Uniquement le code postal, sans autre mention (cedex, ...)', 'required' => false, 'disabled' => true, 'attr' => ['autocomplete'=>'off']])
+            ->add('code_postal', TextType::class, ['label' => 'Code Postal * :','disabled' => true, 'help' => 'Uniquement le code postal, sans autre mention (cedex, ...)', 'required' => false, 'attr' => ['autocomplete'=>'off']])
 
-            ->add('ville', ChoiceType::class, ['label' => 'Ville * :', 'disabled' => true, 'attr' => ['autocomplete'=>'off']])
+            ->add('ville', ChoiceType::class, ['label' => 'Ville * :','disabled' => true, 'attr' => ['autocomplete'=>'off']])
             ->addEventListener(
                 FormEvents::PRE_SUBMIT,
                 [$this, 'onPreSubmit']
