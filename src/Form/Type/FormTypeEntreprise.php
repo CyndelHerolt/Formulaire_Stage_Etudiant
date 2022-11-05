@@ -10,17 +10,15 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-Class FormTypeEntreprise extends AbstractType
+class FormTypeEntreprise extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             //form_entreprise
             ->add('entreprise', EntrepriseType::class, ['label' => 'Entreprise', 'required' => false])
-
-            ->add('retour', SubmitType::class, ['label' => 'Etape précédente', ])
-
-            ->add('suivant', SubmitType::class, ['label' => 'Etape suivante']);
+            ->add('retour', SubmitType::class, ['label' => 'Etape précédente', 'attr' => ['class' => 'btn-precedent']])
+            ->add('suivant', SubmitType::class, ['label' => 'Etape suivante', 'attr' => ['class' => 'btn-suivant']]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

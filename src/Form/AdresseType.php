@@ -27,9 +27,9 @@ class AdresseType extends AbstractType
     {
         $builder
             ->add('adresse1', TextType::class, ['label' => 'Adresse (numéro, rue) * :', 'required' => false, 'disabled' => true, 'attr' => ['autocomplete' => 'off']])
-            ->add('adresse2', TextType::class, ['label' => 'Suite adresse (étage, bâtiment, ...) :', 'required' => false, 'attr' => ['autocomplete' => 'off']])
-            ->add('adresse3', TextType::class, ['label' => 'Complément d’adresse :', 'required' => false, 'attr' => ['autocomplete' => 'off']])
-            ->add('code_postal', TextType::class, ['label' => 'Code Postal * :', 'disabled' => true, 'help' => 'Uniquement le code postal, sans autre mention (cedex, ...)', 'required' => false, 'attr' => ['autocomplete' => 'off']])
+            ->add('adresse2', TextType::class, ['label' => 'Suite adresse (étage, bâtiment, ...) :','disabled' => true, 'required' => false, 'attr' => ['autocomplete' => 'off']])
+            ->add('adresse3', TextType::class, ['label' => 'Complément d’adresse :','disabled' => true, 'required' => false, 'attr' => ['autocomplete' => 'off']])
+            ->add('code_postal', TextType::class, ['label' => 'Code Postal * :', 'disabled' => true, 'required' => false, 'attr' => ['autocomplete' => 'off']])
             ->add('ville', ChoiceType::class, ['label' => 'Ville * :', 'disabled' => true, 'attr' => ['autocomplete' => 'off']])
             ->addEventListener(
                 FormEvents::PRE_SUBMIT,
@@ -39,7 +39,7 @@ class AdresseType extends AbstractType
                 FormEvents::PRE_SET_DATA,
                 [$this, 'onPreSetData']
             )
-            ->add('verif_adresse', ButtonType::class, ['label' => 'Vérifier l\'adresse', 'attr' => ['class' => 'btn btn-warning']]);
+            ->add('verif_adresse', ButtonType::class, ['label' => 'Vérifier l\'adresse', 'attr' => ['class' => 'btn']]);
 
 //            ->add('pays', TextType::class, ['label' => 'label.pays', 'required' => false, 'data' => 'France', 'attr' => ['maxlength' => 100]]);
     }

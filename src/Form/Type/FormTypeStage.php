@@ -42,6 +42,7 @@ class FormTypeStage extends AbstractType
 
             ->add('periodes_interruptions', TextType::class, ['label' => 'Périodes d\'interruptions :', 'help' => 'En complément des périodes déjà prévues', 'attr' => ['autocomplete'=>'off'],'required' => false])
 
+            //todo: changer en nbr décimal
             ->add('duree_hebdomadaire', NumberType::class, ['label' => 'Durée de travail hebdomadaire :', 'attr' => ['autocomplete'=>'off'],'constraints' => [new NotNull(['message' => 'Veuillez renseigner ce champ'])]])
 
             ->add('commentaire_duree_hebdomadaire', TextareaType::class, ['label' => 'Commentaires sur la durée du travail :', 'help' => 'Toutes précisions nécessaires sur la durée de travail', 'attr' => ['autocomplete'=>'off'],'required' => false])

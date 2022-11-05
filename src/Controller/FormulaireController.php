@@ -178,9 +178,9 @@ class FormulaireController extends AbstractController
 
         $form5 = $this->createForm(FormTypeAdresseStage::class, $id);
 
-        if ($request->request->get('button') == 'form_type_adresse_stage_recup_informations') {
-            $id->setAdresseStage($id->getEntreprise()->getAdresse());
-        }
+//        if ($request->request->get('button') == 'form_type_adresse_stage_recup_informations') {
+//            $id->setAdresseStage($id->getEntreprise()->getAdresse());
+//        }
 
         $form5->handleRequest($request);
         if ($form5->isSubmitted()) {

@@ -10,19 +10,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
-Class FormTypeTuteur extends AbstractType
+class FormTypeTuteur extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             //form_responsable
-            ->add('recup_informations', SubmitType::class, ['label' => 'Récupérer informations', 'validate'=>false])
-
+            ->add('recup_informations', SubmitType::class, ['label' => 'Récupérer informations', 'validate' => false])
             ->add('tuteur', TuteurType::class, ['label' => 'Tuteur', 'required' => false])
-
-            ->add('retour', SubmitType::class, ['label' => 'Etape précédente'])
-
-            ->add('suivant', SubmitType::class, ['label' => 'Etape suivante']);
+            ->add('retour', SubmitType::class, ['label' => 'Etape précédente', 'attr' => ['class' => 'btn-precedent']])
+            ->add('suivant', SubmitType::class, ['label' => 'Etape suivante', 'attr' => ['class' => 'btn-suivant']]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

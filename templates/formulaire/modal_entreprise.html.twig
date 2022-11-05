@@ -2,14 +2,13 @@
 
 {% block body %}
 
-    <p class="confirm_infos">Raison Sociale : {{ test.raisonSociale }}</p>
-    <p class="confirm_infos">N° de siret : {{ test.siret }}</p>
-    <p class="confirm_infos">Adresse : {{ test.adresseEntreprise }} <br>
-        {{ test.suiteAdresseEntreprise }} <br>
-        {{ test.complementAdresseEntreprise }} <br>
-        {{ test.cpEntreprise }} <br>
-        {{ test.villeEntreprise }} <br>
-        {{ test.paysEntreprise }}</p>
+    <p class="confirm_infos">Raison Sociale : {{ id.entreprise.siret }}</p>
+    <p class="confirm_infos">N° de siret : {{ id.entreprise.raisonSociale }}</p>
+    <p class="confirm_infos">Adresse : {{ id.entreprise.adresse.adresse1 }}
+        {{ id.entreprise.adresse.adresse2 }}
+        {{ id.entreprise.adresse.adresse3 }} <br>
+        {{ id.entreprise.adresse.codePostal }}
+        {{ id.entreprise.adresse.ville }} </p>
 
 {% endblock %}
 

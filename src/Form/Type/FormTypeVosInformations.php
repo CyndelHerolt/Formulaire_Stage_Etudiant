@@ -18,8 +18,7 @@ class FormTypeVosInformations extends AbstractType
         $builder
             //form_vous
             ->add('etudiant', EtudiantType::class, ['label' => 'Vos informations', 'required' => false])
-
-            ->add('suivant', SubmitType::class, ['label' => 'Etape suivante', 'attr'=>['data-action'=>"click->formulaire#formvous", "data-bs-toggle"=>"modal", "data-bs-target"=>"#exampleModal"]]);
+            ->add('suivant', SubmitType::class, ['label' => 'Etape suivante', 'attr' => ['data-action' => "click->formulaire#formvous", "data-bs-toggle" => "modal", "data-bs-target" => "#exampleModal", 'class' => 'btn-suivant']]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

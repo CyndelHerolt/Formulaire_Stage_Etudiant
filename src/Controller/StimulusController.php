@@ -3,14 +3,14 @@
 // src/Controller/FormulaireController.php
 namespace App\Controller;
 
-use App\Repository\FormulaireRepository;
+use App\Repository\StageEtudiantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 class StimulusController extends AbstractController
 {
-    #[Route('/formulaire-test/vous/{id}', name: 'app_stimulus')]
-    public function modal_vous(FormulaireRepository $StageEtudiantRepository, $id)
+    #[Route('/formulaire/vous/{id}', name: 'app_stimulus')]
+    public function modal_vous(StageEtudiantRepository $StageEtudiantRepository, $id)
     {
 
         $id = $StageEtudiantRepository->find($id);
@@ -23,8 +23,8 @@ class StimulusController extends AbstractController
     //-----------------------------MODAL ENTREPRISE------------------------------
     //---------------------------------------------------------------------------
 
-    #[Route('/formulaire-test/entreprise/{id}', name: 'app_stimulus_modal_entreprise')]
-    public function modal_entreprise(FormulaireRepository $StageEtudiantRepository, $id)
+    #[Route('/formulaire/entreprise/{id}', name: 'app_stimulus_modal_entreprise')]
+    public function modal_entreprise(StageEtudiantRepository $StageEtudiantRepository, $id)
     {
 
         $id = $StageEtudiantRepository->find($id);
@@ -37,8 +37,8 @@ class StimulusController extends AbstractController
     //-----------------------------MODAL RESPONSABLE------------------------------
     //---------------------------------------------------------------------------
 
-    #[Route('/formulaire-test/responsable/{id}', name: 'app_stimulus_modal_responsable')]
-    public function modal_responsable(FormulaireRepository $StageEtudiantRepository, $id)
+    #[Route('/formulaire/responsable/{id}', name: 'app_stimulus_modal_responsable')]
+    public function modal_responsable(StageEtudiantRepository $StageEtudiantRepository, $id)
     {
 
         $id = $StageEtudiantRepository->find($id);
@@ -51,8 +51,8 @@ class StimulusController extends AbstractController
     //-----------------------------MODAL TUTEUR------------------------------
     //---------------------------------------------------------------------------
 
-    #[Route('/formulaire-test/tuteur/{id}', name: 'app_stimulus_modal_tuteur')]
-    public function modal_tuteur(FormulaireRepository $StageEtudiantRepository, $id)
+    #[Route('/formulaire/tuteur/{id}', name: 'app_stimulus_modal_tuteur')]
+    public function modal_tuteur(StageEtudiantRepository $StageEtudiantRepository, $id)
     {
 
         $id = $StageEtudiantRepository->find($id);
@@ -64,8 +64,8 @@ class StimulusController extends AbstractController
     //-----------------------------MODAL ADRESSE STAGE------------------------------
     //---------------------------------------------------------------------------
 
-    #[Route('/formulaire-test/adresse-stage/{id}', name: 'app_stimulus_modal_adss_stage')]
-    public function modal_adresse_stage(FormulaireRepository $StageEtudiantRepository, $id)
+    #[Route('/formulaire/adresse-stage/{id}', name: 'app_stimulus_modal_adss_stage')]
+    public function modal_adresse_stage(StageEtudiantRepository $StageEtudiantRepository, $id)
     {
 
         $id = $StageEtudiantRepository->find($id);
@@ -77,8 +77,8 @@ class StimulusController extends AbstractController
     //-----------------------------MODAL STAGE------------------------------
     //---------------------------------------------------------------------------
 
-    #[Route('/formulaire-test/stage/{id}', name: 'app_stimulus_modal_stage')]
-    public function modal_stage(FormulaireRepository $StageEtudiantRepository, $id)
+    #[Route('/formulaire/stage/{id}', name: 'app_stimulus_modal_stage')]
+    public function modal_stage(StageEtudiantRepository $StageEtudiantRepository, $id)
     {
 
         $id = $StageEtudiantRepository->find($id);

@@ -20,9 +20,9 @@ Class FormTypeResponsable extends AbstractType
             //form_responsable
             ->add('entreprise', EntrepriseType::class, ['label' => 'Responsable', 'required' => false])
 
-            ->add('retour', SubmitType::class, ['label' => 'Etape précédente'])
+            ->add('retour', SubmitType::class, ['label' => 'Etape précédente', 'attr' => ['class' => 'btn-precedent']])
 
-            ->add('suivant', SubmitType::class, ['label' => 'Etape suivante']);
+            ->add('suivant', SubmitType::class, ['label' => 'Etape suivante', 'attr' => ['class' => 'btn-suivant']]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

@@ -10,17 +10,18 @@
 $dropdown-link-hover-color:         var(--policeDark);
 $dropdown-link-hover-bg:            var(--colorIUT);
 
-//@import "~bootstrap/scss/bootstrap";
+@import "~bootstrap/scss/bootstrap";
 
 
 
 @import "./theme.scss";
-@import "./_layout.scss";
+//@import "./_layout.scss";
 @import "./color.scss";
-@import "./apc.scss";
+//@import "./apc.scss";
 //@import "./_toolbar.scss";
 //@import "./_edt.scss";
 //@import "perfect-scrollbar.css";
+@import "./_formulaire.scss";
 
 // FlatPickr
 //@import "~flatpickr";
@@ -28,6 +29,7 @@ $dropdown-link-hover-bg:            var(--colorIUT);
 @import '~tom-select/dist/css/tom-select.bootstrap5.min.css';
 
 /** Correction pour Bootstrap5 */
+
 a {
   text-decoration: none;
 }

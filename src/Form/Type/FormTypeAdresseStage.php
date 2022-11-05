@@ -13,7 +13,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-Class FormTypeAdresseStage extends AbstractType
+class FormTypeAdresseStage extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
@@ -21,9 +21,7 @@ Class FormTypeAdresseStage extends AbstractType
             //form_adresse_stage
             ->add('recup_informations', ButtonType::class, ['label' => 'Récupérer informations'])
             ->add('adresse_stage', AdresseType::class, ['label' => 'Adresse du stage', 'required' => false, 'constraints' => [new NotBlank(['message' => 'Veuillez renseigner une adresse'])]])
-
             ->add('entreprise', EntrepriseType::class)
-
             ->add('retour', SubmitType::class, ['label' => 'Etape précédente'])
             ->add('suivant', SubmitType::class, ['label' => 'Etape suivante']);
     }
