@@ -1,8 +1,6 @@
-{% extends 'base.html.twig' %}
+<p class="form-info">Veuillez confirmer l’exactitude des informations saisies précédemment.</p>
 
-{% block body %}
-
-    <p class="confirm_infos">Organisme de sécurité sociale : {{ id.etudiant.intituleSecuriteSociale }}</p>
+<p class="confirm_infos">Organisme de sécurité sociale : {{ id.etudiant.intituleSecuriteSociale }}</p>
     <p class="confirm_infos">Adresse de l'organisme : {{ id.etudiant.adresseSecuriteSociale }}</p>
     <p class="confirm_infos">Votre adresse : {{ id.etudiant.adresseEtudiant.adresse1 }}
         {{ id.etudiant.adresseEtudiant.adresse2 }}
@@ -12,10 +10,4 @@
     </p>
     <p class="confirm_infos">Votre email personnel : {{ id.etudiant.mailPerso }}</p>
     <p class="confirm_infos">Votre numéro de téléphone : {{ id.etudiant.tel2 }}</p>
-
-{% endblock %}
-
-{% block title %}
-
-{% endblock %}
 

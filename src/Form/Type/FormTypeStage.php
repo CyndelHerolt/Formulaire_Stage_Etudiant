@@ -28,9 +28,9 @@ class FormTypeStage extends AbstractType
     {
         $builder
             //form_adresse_stage
-            ->add('date_debtut_stage', DateType::class, ['label' => 'Date de début :','help' => 'La date doit être saisie au format "jj/mm/aaaa"','attr' => ['autocomplete'=>'off'], 'widget' => 'single_text'/*, 'html5' => false, 'format' => 'l/dd/MM/yyyy', , 'attr' => ['class' => 'js-datepicker']*/])
+            ->add('date_debtut_stage', DateType::class, ['label' => 'Date de début :','help' => 'La date doit être saisie au format "jj/mm/aaaa"','attr' => ['autocomplete'=>'off', 'class' => 'flatdatepicker'], 'widget' => 'single_text', 'html5' => false, 'format' => 'dd/MM/yyyy'])
 
-            ->add('date_fin_stage', DateType::class, ['label' => 'Date de fin  :', 'help' => 'La date doit être saisie au format "jj/mm/aaaa"','attr' => ['autocomplete'=>'off'] ,'widget' => 'single_text',/* 'attr' => ['class' => 'datepicker']*/])
+            ->add('date_fin_stage', DateType::class, ['label' => 'Date de fin  :', 'help' => 'La date doit être saisie au format "jj/mm/aaaa"','attr' => ['autocomplete'=>'off', 'class' => 'flatdatepicker'] ,'widget' => 'single_text', 'html5' => false, 'format' => 'dd/MM/yyyy'])
 
             ->add('duree_jours_stage', IntegerType::class, ['label' => 'Nombre de jours de stage :', 'help' => 'En jours ouvrés (hors week-end et jours fériés)', 'attr' => ['autocomplete'=>'off']])
 

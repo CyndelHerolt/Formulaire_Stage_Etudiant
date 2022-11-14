@@ -1,18 +1,11 @@
-{% extends 'base.html.twig' %}
 
-{% block body %}
+<p class="form-info">Veuillez confirmer l’exactitude des informations saisies précédemment.</p>
 
-    <p class="confirm_infos">Raison Sociale : {{ id.entreprise.siret }}</p>
-    <p class="confirm_infos">N° de siret : {{ id.entreprise.raisonSociale }}</p>
+<p class="confirm_infos">N° de siret : {{ id.entreprise.siret }}</p>
+    <p class="confirm_infos">Raison Sociale : {{ id.entreprise.raisonSociale }}</p>
     <p class="confirm_infos">Adresse : {{ id.entreprise.adresse.adresse1 }}
         {{ id.entreprise.adresse.adresse2 }}
         {{ id.entreprise.adresse.adresse3 }} <br>
         {{ id.entreprise.adresse.codePostal }}
         {{ id.entreprise.adresse.ville }} </p>
-
-{% endblock %}
-
-{% block title %}
-
-{% endblock %}
 

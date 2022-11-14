@@ -14,4 +14,6 @@ import './bootstrap';
 import * as bootstrap from 'bootstrap'
 import './css/app.scss'
 
+import flatpickr from "flatpickr";
+
 import $ from 'jquery'

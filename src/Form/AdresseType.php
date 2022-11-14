@@ -39,7 +39,7 @@ class AdresseType extends AbstractType
                 FormEvents::PRE_SET_DATA,
                 [$this, 'onPreSetData']
             )
-            ->add('verif_adresse', ButtonType::class, ['label' => 'Vérifier l\'adresse', 'attr' => ['class' => 'btn']]);
+            ->add('modif_adresse', ButtonType::class, ['label' => 'Modifier l\'adresse', 'attr' => ['class' => 'btn']]);
 
 //            ->add('pays', TextType::class, ['label' => 'label.pays', 'required' => false, 'data' => 'France', 'attr' => ['maxlength' => 100]]);
     }
