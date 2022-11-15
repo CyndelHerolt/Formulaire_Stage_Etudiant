@@ -5,20 +5,15 @@ namespace App\Controller;
 
 use App\Entity\Contact;
 use App\Entity\StageEtudiant;
-use App\Form\EntrepriseType;
 use App\Form\ResponsableType;
-use App\Form\TuteurType;
 use App\Form\Type\FormTypeAdresseStage;
 use App\Form\Type\FormTypeEntreprise;
 use App\Form\Type\FormTypeVosInformations;
-use App\Form\Type\FormTypeResponsable;
 use App\Form\Type\FormTypeStage;
 use App\Form\Type\FormTypeTuteur;
 use App\Repository\ContactRepository;
-use App\Repository\FormulaireRepository;
 use App\Repository\StageEtudiantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Form;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -283,6 +278,31 @@ class FormulaireController extends AbstractController
             $date_debut->add(new \DateInterval('P1D'));
         }
         return $this->json(['duree' => $interval]);
+    }
+
+
+    #[Route('/formulaire/stage/recapitulatif/{id}', name: 'app_formulaireRecap')]
+    public function new_form_stage_recapitulatif(Request $request, StageEtudiantRepository $StageEtudiantRepository, $id): Response
+    {
+        $id = $StageEtudiantRepository->find($id);
+
+        $form7 = $this->createForm(FormTypeStage::class, $id);
+
+        $form7->handleRequest($request);
+        if ($form7->isSubmitted() && $form7->isValid()) {
+
+            //Si clic sur "retour"
+            if ($form7->get('retour')->isClicked()) {
+                //Alors location->formulaire/entreprise
+                return $this->redirectToRoute('app_formulaireAdresseStage', ['id' => $id->getId()]);
+            } //Si clic sur "suivant"
+            else {
+                $StageEtudiantRepository->save($id, true);
+                return $this->redirectToRoute('app_formulaire');
+            }
+        }
+
+        return $this->renderForm('formulaire/index.html.twig', ['form_stage' => $form7, 'step' => 7, 'id' => $id]);
     }
 
 }

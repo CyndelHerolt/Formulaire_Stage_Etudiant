@@ -13,6 +13,16 @@ body {
       .card-body {
         padding: 35px;
 
+        .modal-footer {
+          justify-content: space-between !important;
+
+          .btn {
+            background-color: #4D3677 !important;
+            color: #fff !important;
+            border: none;
+          }
+        }
+
         .nav-process-circle {
           margin: 20px 0 30px 0;
           font-size: 14px;
@@ -85,9 +95,20 @@ body {
                 width: 45%;
               }
             }
+
+            .mission {
+              display: flex;
+              flex-direction: column;
+              width: 100%;
+
+            .mb-3 {
+              width: 100%;
+            }
+            }
           }
 
           .form-group-adresse {
+
             #adresseliste, #adresselisteEntreprise {
               padding: 0;
               list-style: none;
@@ -164,6 +185,9 @@ body {
                   color: white;
                   font-size: 14px;
                 }
+                .btn-final {
+                  background-color: greenyellow;
+                }
               }
             }
           }
@@ -197,6 +221,7 @@ body {
             background-color: #fff2cd;
             align-items: center;
             padding: 10px 0;
+            margin-bottom: 20px;
 
             p {
               padding-left: 20px;
@@ -210,7 +235,7 @@ body {
 
             button {
               background-color: #4D3677;
-              color: white;
+              color: white !important;
               font-size: 14px;
               border: none;
               height: 40px;
@@ -220,4 +245,30 @@ body {
       }
     }
   }
+
+  #gratif {
+    width: 45%;
+
+    .mb-3 {
+      width: 100%;
+    }
+  }
+
+  #gratif_opt1 {
+    width: 45%;
+
+    .mb-3 {
+      width: 100% !important;
+    }
+  }
+
+  #gratif_opt2 {
+    width: 45%;
+
+    .mb-3 {
+      width: 100% !important;
+    }
+  }
 }
+
+

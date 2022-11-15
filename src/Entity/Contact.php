@@ -36,25 +36,6 @@ class Contact
     #[ORM\OneToMany(mappedBy: 'tuteur', targetEntity: StageEtudiant::class)]
     private Collection $stageEtudiants;
 
-//    #[ORM\OneToMany(mappedBy: 'entreprise', targetEntity: Entreprise::class)]
-//    private ?Entreprise $entreprise = null;
-//
-//    /**
-//     * @return Entreprise|null
-//     */
-//    public function getEntreprise(): ?Entreprise
-//    {
-//        return $this->entreprise;
-//    }
-//
-//    /**
-//     * @param Entreprise|null $entreprise
-//     */
-//    public function setEntreprise(?Entreprise $entreprise): void
-//    {
-//        $this->entreprise = $entreprise;
-//    }
-
 
     public function __construct()
     {

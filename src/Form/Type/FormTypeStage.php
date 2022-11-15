@@ -27,7 +27,7 @@ class FormTypeStage extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            //form_adresse_stage
+
             ->add('date_debtut_stage', DateType::class, ['label' => 'Date de début :','help' => 'La date doit être saisie au format "jj/mm/aaaa"','attr' => ['autocomplete'=>'off', 'class' => 'flatdatepicker'], 'widget' => 'single_text', 'html5' => false, 'format' => 'dd/MM/yyyy'])
 
             ->add('date_fin_stage', DateType::class, ['label' => 'Date de fin  :', 'help' => 'La date doit être saisie au format "jj/mm/aaaa"','attr' => ['autocomplete'=>'off', 'class' => 'flatdatepicker'] ,'widget' => 'single_text', 'html5' => false, 'format' => 'dd/MM/yyyy'])
@@ -57,9 +57,9 @@ class FormTypeStage extends AbstractType
 
             ->add('avantages', TextareaType::class, ['label' => 'Avantages :', 'help' => 'Autres avantages (frais de transports, ...)', 'attr' => ['autocomplete'=>'off'],'required' => false])
 
-            ->add('retour', SubmitType::class, ['label' => 'Etape précédente'])
+            ->add('retour', SubmitType::class, ['label' => 'Etape précédente', 'attr' => ['class' => 'btn-precedent']])
 
-            ->add('suivant', SubmitType::class, ['label' => 'Etape suivante']);
+            ->add('suivant', SubmitType::class, ['label' => 'Etape suivante', 'attr' => ['class' => 'btn-success']]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

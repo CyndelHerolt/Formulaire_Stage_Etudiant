@@ -5,7 +5,6 @@ namespace App\Form\Type;
 
 use App\Entity\StageEtudiant;
 use App\Form\EntrepriseType;
-use App\Form\ResponsableType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\AbstractType;

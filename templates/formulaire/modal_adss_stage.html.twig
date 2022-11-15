@@ -1,16 +1,7 @@
-{% extends 'base.html.twig' %}
 
-{% block body %}
-
-    <p class="confirm_infos">Adresse : {{ test.adresseStage }} <br>
-        {{ test.suiteAdresseStage }} <br>
-        {{ test.complementAdresseStage }} <br>
-        {{ test.cpStage }} <br>
-        {{ test.villeStage }} </p>
-
-{% endblock %}
-
-{% block title %}
-
-{% endblock %}
+    <p class="confirm_infos">Adresse : {{ id.adresseStage.adresse1 }}
+        {{ id.adresseStage.adresse2 }}
+        {{ id.adresseStage.adresse3 }}
+        {{ id.adresseStage.codePostal }}
+        {{ id.adresseStage.ville }} </p>
 

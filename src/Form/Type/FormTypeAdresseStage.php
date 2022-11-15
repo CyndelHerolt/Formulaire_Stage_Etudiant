@@ -22,8 +22,8 @@ class FormTypeAdresseStage extends AbstractType
             ->add('recup_informations', ButtonType::class, ['label' => 'Récupérer informations'])
             ->add('adresse_stage', AdresseType::class, ['label' => 'Adresse du stage', 'required' => false, 'constraints' => [new NotBlank(['message' => 'Veuillez renseigner une adresse'])]])
             ->add('entreprise', EntrepriseType::class)
-            ->add('retour', SubmitType::class, ['label' => 'Etape précédente'])
-            ->add('suivant', SubmitType::class, ['label' => 'Etape suivante']);
+            ->add('retour', SubmitType::class, ['label' => 'Etape précédente', 'attr' => ['class' => 'btn-precedent']])
+            ->add('suivant', SubmitType::class, ['label' => 'Etape suivante', 'attr' => ['class' => 'btn-suivant']]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

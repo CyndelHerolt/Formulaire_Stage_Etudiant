@@ -1,18 +1,9 @@
-{% extends 'base.html.twig' %}
 
-{% block body %}
-
-    <p class="confirm_infos">Prénom : {{ test.prenomTuteur }}</p>
-    <p class="confirm_infos">Nom : {{ test.nomTuteur }}</p>
-    <p class="confirm_infos">Fonction dans l'entreprise : {{ test.fonctionTuteur }} <br></p>
-    <p class="confirm_infos">Email : {{ test.emailTuteur }} <br></p>
-    <p class="confirm_infos">Téléphone : {{ test.telTuteur }} <br></p>
-    <p class="confirm_infos">Portable : {{ test.portableTuteur }} <br></p>
-    <p class="confirm_infos">Fax : {{ test.faxTuteur }} <br></p>
-
-{% endblock %}
-
-{% block title %}
-
-{% endblock %}
+    <p class="confirm_infos">Prénom : {{ id.tuteur.prenom }}</p>
+    <p class="confirm_infos">Nom : {{ id.tuteur.nom }}</p>
+    <p class="confirm_infos">Fonction dans l'entreprise : {{ id.tuteur.fonction }} <br></p>
+    <p class="confirm_infos">Email : {{ id.tuteur.email }} <br></p>
+    <p class="confirm_infos">Téléphone : {{ id.tuteur.telephone }} <br></p>
+    <p class="confirm_infos">Portable : {{ id.tuteur.portable }} <br></p>
+{#    <p class="confirm_infos">Fax : {{ test.faxTuteur }} <br></p>#}
 
