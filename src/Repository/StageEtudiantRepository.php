@@ -6,6 +6,7 @@ use App\Entity\StageEtudiant;
 
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use http\Client\Response;
 
 /**
  * @extends ServiceEntityRepository<StageEtudiant>
@@ -38,6 +39,25 @@ class StageEtudiantRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function update(ManagerRegistry $doctrine, int $id): Response
+    {
+        $entityManager = $doctrine->getManager();
+        $infoStage = $entityManager->getRepository(StageEtudiant::class)->find($id);
+
+        if (!$infoStage) {
+            throw $this->createNotFoundException(
+                'Nothing found for '.$id
+            );
+        }
+
+        $infoStage->setName('New product name!');
+        $entityManager->flush();
+
+        return $this->redirectToRoute('product_show', [
+            'id' => $infoStage->getId()
+        ]);
     }
 
 //    /**

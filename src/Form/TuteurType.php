@@ -20,18 +20,20 @@ class TuteurType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('prenom', TextType::class, ['label' => 'Prénom * :', 'attr' => ['autocomplete'=>'off']])
-
-            ->add('nom', TextType::class, ['label' => 'Nom * :', 'attr' => ['autocomplete'=>'off']])
-
-            ->add('fonction', TextType::class, ['label' => 'Fonction dans l\'entreprise * :', 'attr' => ['autocomplete'=>'off']])
-
-            ->add('email', EmailType::class, ['label' => 'Email :', 'required' => false, 'constraints' => [new NotBlank(message: 'Veuillez renseigner ce champ'), new Email(message: 'Veuiilez renseigner un email valide')], 'attr' => ['autocomplete'=>'off']])
-
-            ->add('telephone', IntegerType::class, ['label' => 'Téléphone :', 'required' => false, 'attr' => ['autocomplete'=>'off']])
-
-            ->add('portable', IntegerType::class, ['label' => 'Portable * :', 'attr' => ['autocomplete'=>'off']]);
-
+            ->add('prenom', TextType::class, ['label' => 'Prénom :',
+//                'constraints' => [new NotBlank(message: 'Veuillez renseigner ce champ')],
+                'attr' => ['autocomplete' => 'off']])
+            ->add('nom', TextType::class, ['label' => 'Nom :', 'required' => false,
+//                'constraints' => [new NotBlank(message: 'Veuillez renseigner ce champ')],
+                'attr' => ['autocomplete' => 'off']])
+            ->add('fonction', TextType::class, ['label' => 'Fonction dans l\'entreprise :', 'required' => false,
+//                'constraints' => [new NotBlank(message: 'Veuillez renseigner ce champ')],
+                'attr' => ['autocomplete' => 'off']])
+            ->add('email', EmailType::class, ['label' => 'Email :', 'required' => false, 'help' => 'l\'email doit être saisi sous la forme : xxxxxx@xxx.xxx.', 'attr' => ['autocomplete' => 'off']])
+            ->add('telephone', IntegerType::class, ['label' => 'Téléphone :','help' => 'le numéro de téléphone doit comporter 10 chiffres.', 'required' => false, 'attr' => ['autocomplete' => 'off']])
+            ->add('portable', IntegerType::class, ['label' => 'Portable :','help' => 'le numéro de portable doit comporter 10 chiffres.', 'required' => false,
+//                'constraints' => [new NotNull(message: 'Veuillez renseigner ce champ')],
+                'attr' => ['autocomplete' => 'off']]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

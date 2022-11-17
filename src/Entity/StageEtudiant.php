@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\StageEtudiantRepository;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -36,9 +37,11 @@ class StageEtudiant
     private ?Adresse $adresse_stage = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+//    #[Assert\NotBlank]
     private ?\DateTimeInterface $date_debtut_stage = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+//    #[Assert\NotBlank]
     private ?\DateTimeInterface $date_fin_stage = null;
 
     #[ORM\Column]
@@ -48,15 +51,18 @@ class StageEtudiant
     private ?string $service_stage_entreprise = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+//    #[Assert\NotBlank]
     private ?string $sujet_stage = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+//    #[Assert\NotBlank]
     private ?string $activites = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $periodes_interruptions = null;
 
     #[ORM\Column]
+//    #[Assert\NotBlank]
     private ?int $duree_hebdomadaire = null;
 
     #[ORM\Column(length: 255, nullable: true)]
@@ -66,12 +72,15 @@ class StageEtudiant
     private ?string $amenagement_stagec = null;
 
     #[ORM\Column]
+//    #[Assert\NotNull]
     private ?bool $gratification = null;
 
     #[ORM\Column(length: 1, nullable: true)]
+//    #[Assert\NotBlank]
     private ?string $gratification_periode = null;
 
     #[ORM\Column(nullable: true)]
+//    #[Assert\NotBlank]
     private ?int $gratification_montant = null;
 
     #[ORM\Column(length: 255, nullable: true)]

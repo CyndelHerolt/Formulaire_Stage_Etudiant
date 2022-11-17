@@ -5,7 +5,9 @@ namespace App\Entity;
 use App\Repository\EtudiantRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints\Email;
 
 #[ORM\Entity(repositoryClass: EtudiantRepository::class)]
 class Etudiant
@@ -22,15 +24,20 @@ class Etudiant
     private Collection $stageEtudiants;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message: 'Veuillez renseigner ce champ')]
     private ?string $intituleSecuriteSociale = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $adresseSecuriteSociale = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank(message: 'Veuillez renseigner ce champ')]
+    #[Assert\Email(message: 'Veuillez renseigner un email valide')]
     private ?string $mail_perso = null;
 
     #[ORM\Column(length: 20, nullable: true)]
+    #[Assert\NotBlank(message: 'Veuillez renseigner ce champ')]
+    #[Assert\Length(min: 10, max: 10, exactMessage: 'Le numéro de téléphone doit comporter 10 chiffres')]
     private ?string $tel2 = null;
 
 

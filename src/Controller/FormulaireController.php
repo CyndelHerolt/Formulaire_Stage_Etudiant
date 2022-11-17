@@ -14,12 +14,17 @@ use App\Form\Type\FormTypeTuteur;
 use App\Repository\ContactRepository;
 use App\Repository\StageEtudiantRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class FormulaireController extends AbstractController
 {
+
+    //todo: ajouter les contraintes de validation + message d'erreur
+    //todo: update les entités pr éviter l'accumulation d'entrées dans la DB (https://symfony.com/doc/current/doctrine.html#updating-an-object)
+    //todo: si adresse entreprise & stage || contact responsable & tuteur identiques, ne pas les dupliquer dans la DB, juste reprendre l'id
 
     // -------------------------------------------1ERE ETAPE-------------------------------------------------
     // ------------------------------------------------------------------------------------------------------
@@ -49,13 +54,21 @@ class FormulaireController extends AbstractController
             //$entityManager->flush(); // on effectue les différentes modifications sur la base de données
             //Autre manière de procéder
 
-
             $stageEtudiantRepository->save($task, true);
 
             return $this->json(['route' => $this->generateUrl('app_formulaireEntreprise', ['id' => $task->getId()])]);
         }
+        if ($form->isSubmitted() && !$form->isValid()) {
 
-        return $this->renderForm('formulaire/index.html.twig', ['form_vous' => $form, 'step' => 1, 'id' => $task->getId()]);
+            $errors = [];
+            foreach ($form->getErrors(true) as $formError) {
+                $errors[$formError->getOrigin()->getName()] = $formError->getMessage();
+            }
+
+//            dump($errors);
+            return $this->json($errors);
+        }
+        return $this->render('formulaire/index.html.twig', ['form_vous' => $form->createView(), 'step' => 1, 'id' => $task->getId()]);
     }
 
 
@@ -64,9 +77,9 @@ class FormulaireController extends AbstractController
     // ------------------------------------------------------------------------------------------------------
 
     #[Route('/formulaire/entreprise/{id}', name: 'app_formulaireEntreprise')]
-    public function new_form_entreprise(Request $request, StageEtudiantRepository $StageEtudiantRepository, $id): Response
+    public function new_form_entreprise(Request $request, StageEtudiantRepository $stageEtudiantRepository, $id): Response
     {
-        $id = $StageEtudiantRepository->find($id);
+        $id = $stageEtudiantRepository->find($id);
 
         $form2 = $this->createForm(FormTypeEntreprise::class, $id, [
             'action' => $this->generateUrl('app_formulaireEntreprise', ['id' => $id->getId()])
@@ -80,7 +93,7 @@ class FormulaireController extends AbstractController
 //            dump($request->request->get('button'));
 
             if ($form2->isValid()) {
-                $StageEtudiantRepository->save($id, true);
+                $stageEtudiantRepository->save($id, true);
 
                 if ($request->request->get('button') == 'form_type_entreprise_suivant') {
                     return $this->json(['route' => $this->generateUrl('app_formulaireResponsable', ['id' => $id->getId()])]);
@@ -98,9 +111,9 @@ class FormulaireController extends AbstractController
     // ------------------------------------------------------------------------------------------------------
 
     #[Route('/formulaire/responsable/{id}', name: 'app_formulaireResponsable')]
-    public function new_form_responsable(Request $request, StageEtudiantRepository $StageEtudiantRepository, ContactRepository $contactRepository, $id): Response
+    public function new_form_responsable(Request $request, StageEtudiantRepository $stageEtudiantRepository, ContactRepository $contactRepository, $id): Response
     {
-        $id = $StageEtudiantRepository->find($id);
+        $id = $stageEtudiantRepository->find($id);
 
 //        $responsable = $id->getEntreprise() -> getResponsable();
         $responsable = new Contact();
@@ -115,7 +128,7 @@ class FormulaireController extends AbstractController
             if ($form3->isValid()) {
                 $contactRepository->save($responsable, true);
                 $id->getEntreprise()->setResponsable($responsable);
-                $StageEtudiantRepository->save($id, true);
+                $stageEtudiantRepository->save($id, true);
 
                 if ($request->request->get('button') == 'responsable_suivant') {
                     return $this->json(['route' => $this->generateUrl('app_formulaireTuteur', ['id' => $id->getId()])]);
@@ -132,9 +145,9 @@ class FormulaireController extends AbstractController
     // ------------------------------------------------------------------------------------------------------
 
     #[Route('/formulaire/tuteur/{id}', name: 'app_formulaireTuteur')]
-    public function new_form_tuteur(Request $request, StageEtudiantRepository $StageEtudiantRepository, ContactRepository $contactRepository, $id): Response
+    public function new_form_tuteur(Request $request, StageEtudiantRepository $stageEtudiantRepository, ContactRepository $contactRepository, $id): Response
     {
-        $id = $StageEtudiantRepository->find($id);
+        $id = $stageEtudiantRepository->find($id);
 
         $form4 = $this->createForm(FormTypeTuteur::class, $id);
 
@@ -148,7 +161,7 @@ class FormulaireController extends AbstractController
 //                dump($request->request);
 //                die();
 
-                $StageEtudiantRepository->save($id, true);
+                $stageEtudiantRepository->save($id, true);
                 return $this->redirectToRoute('app_formulaireAdresseStage', ['id' => $id->getId()]);
             } elseif ($form4->get('retour')->isClicked()) {
                 return $this->redirectToRoute('app_formulaireResponsable', ['id' => $id->getId()]);
@@ -167,9 +180,9 @@ class FormulaireController extends AbstractController
 
 
     #[Route('/formulaire/adresse_stage/{id}', name: 'app_formulaireAdresseStage')]
-    public function new_form_adresse_stage(Request $request, StageEtudiantRepository $StageEtudiantRepository, $id): Response
+    public function new_form_adresse_stage(Request $request, StageEtudiantRepository $stageEtudiantRepository, $id): Response
     {
-        $id = $StageEtudiantRepository->find($id);
+        $id = $stageEtudiantRepository->find($id);
 
         $form5 = $this->createForm(FormTypeAdresseStage::class, $id);
 
@@ -181,7 +194,7 @@ class FormulaireController extends AbstractController
         if ($form5->isSubmitted()) {
 
             if ($form5->isValid()) {
-                $StageEtudiantRepository->save($id, true);
+                $stageEtudiantRepository->save($id, true);
 
                 if ($request->request->get('button') == 'form_type_adresse_stage_suivant') {
                     return $this->json(['route' => $this->generateUrl('app_formulaireStage', ['id' => $id->getId()])]);
@@ -195,9 +208,9 @@ class FormulaireController extends AbstractController
 
 
     #[Route('/formulaire/stage/{id}', name: 'app_formulaireStage')]
-    public function new_form_stage(Request $request, StageEtudiantRepository $StageEtudiantRepository, $id): Response
+    public function new_form_stage(Request $request, StageEtudiantRepository $stageEtudiantRepository, $id): Response
     {
-        $id = $StageEtudiantRepository->find($id);
+        $id = $stageEtudiantRepository->find($id);
 
         $form6 = $this->createForm(FormTypeStage::class, $id);
 
@@ -210,8 +223,8 @@ class FormulaireController extends AbstractController
                 return $this->redirectToRoute('app_formulaireAdresseStage', ['id' => $id->getId()]);
             } //Si clic sur "suivant"
             else {
-                $StageEtudiantRepository->save($id, true);
-                return $this->redirectToRoute('app_formulaire');
+                $stageEtudiantRepository->save($id, true);
+                return $this->redirectToRoute('app_formulaireRecap', ['id' => $id->getId()]);
             }
         }
 
@@ -282,27 +295,13 @@ class FormulaireController extends AbstractController
 
 
     #[Route('/formulaire/stage/recapitulatif/{id}', name: 'app_formulaireRecap')]
-    public function new_form_stage_recapitulatif(Request $request, StageEtudiantRepository $StageEtudiantRepository, $id): Response
+    public function new_form_stage_recapitulatif(Request $request, StageEtudiantRepository $stageEtudiantRepository, $id): Response
     {
-        $id = $StageEtudiantRepository->find($id);
+        $id = $stageEtudiantRepository->find($id);
 
-        $form7 = $this->createForm(FormTypeStage::class, $id);
+//        $form7 = $this->createForm(RecapType::class, $id);
 
-        $form7->handleRequest($request);
-        if ($form7->isSubmitted() && $form7->isValid()) {
-
-            //Si clic sur "retour"
-            if ($form7->get('retour')->isClicked()) {
-                //Alors location->formulaire/entreprise
-                return $this->redirectToRoute('app_formulaireAdresseStage', ['id' => $id->getId()]);
-            } //Si clic sur "suivant"
-            else {
-                $StageEtudiantRepository->save($id, true);
-                return $this->redirectToRoute('app_formulaire');
-            }
-        }
-
-        return $this->renderForm('formulaire/index.html.twig', ['form_stage' => $form7, 'step' => 7, 'id' => $id]);
+        return $this->renderForm('formulaire/index.html.twig', [ /*'form_recap' => $form7,*/ 'step' => 7, 'id' => $id]);
     }
 
 }
