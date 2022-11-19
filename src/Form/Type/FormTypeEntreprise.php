@@ -16,9 +16,23 @@ class FormTypeEntreprise extends AbstractType
     {
         $builder
             //form_entreprise
-            ->add('entreprise', EntrepriseType::class, ['label' => 'Entreprise', 'required' => false])
-            ->add('retour', SubmitType::class, ['label' => 'Etape précédente', 'attr' => ['class' => 'btn-precedent']])
-            ->add('suivant', SubmitType::class, ['label' => 'Etape suivante', 'attr' => ['class' => 'btn-suivant']]);
+            ->add('entreprise', EntrepriseType::class,
+                [
+                    'label' => 'Entreprise',
+                    'required' => false
+                ]
+            )
+            ->add('retour', SubmitType::class, [
+                    'label' => 'Etape précédente',
+                    'attr' => ['class' => 'btn-precedent']
+                ]
+            )
+            ->add('suivant', SubmitType::class,
+                [
+                    'label' => 'Etape suivante',
+                    'attr' => ['class' => 'btn-suivant']
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

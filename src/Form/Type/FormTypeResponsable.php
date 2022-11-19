@@ -11,17 +11,30 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 //@deprecated
-Class FormTypeResponsable extends AbstractType
+class FormTypeResponsable extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             //form_responsable
-            ->add('entreprise', EntrepriseType::class, ['label' => 'Responsable', 'required' => false])
-
-            ->add('retour', SubmitType::class, ['label' => 'Etape précédente', 'attr' => ['class' => 'btn-precedent']])
-
-            ->add('suivant', SubmitType::class, ['label' => 'Etape suivante', 'attr' => ['class' => 'btn-suivant']]);
+            ->add('entreprise', EntrepriseType::class,
+                [
+                    'label' => 'Responsable',
+                    'required' => false
+                ]
+            )
+            ->add('retour', SubmitType::class,
+                [
+                    'label' => 'Etape précédente',
+                    'attr' => ['class' => 'btn-precedent']
+                ]
+            )
+            ->add('suivant', SubmitType::class,
+                [
+                    'label' => 'Etape suivante',
+                    'attr' => ['class' => 'btn-suivant']
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

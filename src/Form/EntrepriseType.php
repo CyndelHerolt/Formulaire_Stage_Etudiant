@@ -15,12 +15,9 @@ class EntrepriseType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('siret', NumberType::class, ['label' => 'N° SIRET :', 'help' => 'Le siret est obligatoire pour toutes les entreprises, sauf pour les organismes publics.', 'attr' => ['autocomplete'=>'off'], 'required' => false])
-
-            ->add('raison_sociale', TextType::class, ['label' => 'Raison Sociale :', 'help'=>'La raison sociale est le nom de l’entreprise ou de l’organisme',
-                'constraints' => [new NotBlank(message: 'Veuillez renseigner ce champ')],
-                'attr' => ['autocomplete'=>'off']])
-
+            ->add('siret', NumberType::class, ['label' => 'N° SIRET :', 'help' => 'Le siret est obligatoire pour toutes les entreprises, sauf pour les organismes publics.', 'required' => false])
+            ->add('raison_sociale', TextType::class, ['label' => 'Raison Sociale :', 'help' => 'La raison sociale est le nom de l’entreprise ou de l’organisme',
+                'constraints' => [new NotBlank(message: 'Veuillez renseigner ce champ')]])
             ->add('adresse', AdresseType::class, ['label' => 'Récapitulatif', 'required' => false]);
 
 //            ->add('responsable', ResponsableType::class, ['label' => 'responsable', 'required' => false]);

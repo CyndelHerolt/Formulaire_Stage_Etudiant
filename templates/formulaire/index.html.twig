@@ -9,7 +9,6 @@
         <div class="card col-11">
             <div class="card-body">
                 {% if step==1 %}
-
                     <ul class="nav nav-process nav-process-circle">
                         <li class="nav-item processing">
                             Vous
@@ -53,6 +52,7 @@
                         <div class="form-group-adresse">
                             <label for="adresse" class="form-label">Votre adresse :</label> <br>
                             <input type="text" id="adresse" class="form-control" autocomplete="off">
+                            <div class="form-text mb-0 help-text">Veuillez saisir votre adresse puis sélectionner la proposition correspondante</div>
                             <ul id="adresseliste">
                             </ul>
 
@@ -349,6 +349,8 @@
                                 <div class="form-group-adresse">
                                     <label for="adresseEntreprise" class="form-label">Adresse :</label> <br>
                                     <input type="text" id="adresseEntreprise" class="form-control">
+                                    <div class="form-text mb-0 help-text">Veuillez saisir votre adresse puis sélectionner la proposition correspondante</div>
+
                                     <ul id="adresselisteEntreprise">
                                     </ul>
 
@@ -811,6 +813,8 @@
 
                                     <label for="adresseStage" class="form-label">Adresse :</label> <br>
                                     <input type="text" id="adresseStage" class="form-control">
+                                    <div class="form-text mb-0 help-text">Veuillez saisir votre adresse puis sélectionner la proposition correspondante</div>
+
                                     <ul id="adresselisteStage">
                                     </ul>
 
@@ -1036,7 +1040,7 @@
 
                             //---------------------------------------------------------------------------
                             //--------------------------RECUP DATA ENTREPRISE----------------------------
-                            //---------------------------------------------------------------------------
+                            //--------------en JS car le submit de ce form est en JS---------------------
 
                             const formElemAdresseStage = document.forms['form_type_adresse_stage']
                             document.getElementById('form_type_adresse_stage_recup_informations').addEventListener('click', async (e) => {
@@ -1045,7 +1049,6 @@
                                 document.getElementById('form_type_adresse_stage_adresse_stage_adresse2').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_adresse2').value;
                                 document.getElementById('form_type_adresse_stage_adresse_stage_adresse3').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_adresse3').value;
                                 document.getElementById('form_type_adresse_stage_adresse_stage_code_postal').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_code_postal').value;
-                                // document.getElementById('form_type_adresse_stage_adresse_stage_ville').value = document.getElementById('form_type_adresse_stage_entreprise_adresse_ville').value;
 
                                 let opt = document.createElement("option");
                                 document.getElementById('form_type_adresse_stage_adresse_stage_ville').innerHTML = ''
@@ -1102,7 +1105,7 @@
                             <div class="form-rows">
                                 <div class="form-main">
                                     {{ form_start(form_stage) }}
-                                    {{ form_row(form_stage.date_debtut_stage) }}
+                                    {{ form_row(form_stage.date_debut_stage) }}
                                     {{ form_row(form_stage.date_fin_stage) }}
                                     {{ form_row(form_stage.duree_jours_stage) }}
                                     {{ form_row(form_stage.service_stage_entreprise) }}
@@ -1114,7 +1117,7 @@
                                     {{ form_row(form_stage.duree_hebdomadaire) }}
                                     <div class="mission">
                                         {{ form_row(form_stage.commentaire_duree_hebdomadaire) }}
-                                        {{ form_row(form_stage.amenagement_stagec) }}
+                                        {{ form_row(form_stage.amenagement_stage) }}
                                     </div>
                                     <div id="gratif">
                                         {{ form_row(form_stage.gratification) }}
@@ -1161,8 +1164,10 @@
                             {#                            //------------------------------------------------------------------------------ -#}
                             {#                            //-----------------------CALC NBR JOURS----------------------------------------- -#}
 
-                            document.getElementById('form_type_stage_date_fin_stage').addEventListener('change', (e) => {
-                                let dateDebutStage = document.getElementById('form_type_stage_date_debtut_stage').value
+                            document.getElementById('form_type_stage_date_fin_stage').addEventListener('change', calcJours)
+                            document.getElementById('form_type_stage_date_debut_stage').addEventListener('change', calcJours)
+                            function calcJours(e) {
+                                let dateDebutStage = document.getElementById('form_type_stage_date_debut_stage').value
                                 let dateFinStage = document.getElementById('form_type_stage_date_fin_stage').value
 
                                 fetch('{{ path('calendar') }}', {
@@ -1192,10 +1197,14 @@
                                             document.getElementById(('gratif')).style.display = 'block'
                                             document.querySelector('.form-check:nth-child(1)').style.display = 'block'
                                             document.querySelector('.form-check:nth-child(2)').style.display = 'none'
-
                                         } else {
                                             // gratification.value = 'non'
                                             gratificationNon.checked = true
+                                            document.getElementById('form_type_stage_gratification_periode_2').value = ''
+                                            document.getElementById('form_type_stage_gratification_periode_1').value = ''
+                                            document.getElementById('form_type_stage_gratification_periode_0').value = ''
+
+                                            document.getElementById('form_type_stage_gratification_montant').value = 0
                                             document.getElementById(('gratif_opt1')).style.display = 'none'
                                             document.getElementById(('gratif_opt2')).style.display = 'none'
                                             document.getElementById(('gratif')).style.display = 'block'
@@ -1207,25 +1216,13 @@
                                                 document.getElementById(('gratif_opt2')).style.display = 'block'
                                             })
                                             gratificationNon.addEventListener('click', () => {
-                                                document.getElementById(('gratif_opt1')).style.display = 'none'
-                                                document.getElementById(('gratif_opt2')).style.display = 'none'
+                                                document.getElementById('gratif_opt1').style.display = 'none'
+
+                                                document.getElementById('gratif_opt2').style.display = 'none'
                                             })
                                         }
-
                                     })
-                            })
-
-
-                            // document.getElementById('form_type_stage_date_fin_stage').addEventListener('change', (e) => {
-                            //     let interval = document.getElementById('form_type_stage_duree_jours_stage')
-                            //     let gratification = document.getElementById('form_type_stage_gratification')
-                            //             if (interval.value >= 40) {
-                            //                 gratification.value = 'oui'
-                            //             } else {
-                            //                 gratification.value = 'non'
-                            //             }
-                            // })
-
+                            }
                         })
 
                         //
@@ -1374,7 +1371,7 @@
                         </tr>
                         <tr>
                             <td>Date de début :</td>
-                            <td>{{ id.dateDebtutStage|date('d-m-Y') }}</td>
+                            <td>{{ id.dateDebutStage|date('d-m-Y') }}</td>
                         </tr>
                         <tr>
                             <td>Date de fin :</td>
@@ -1410,7 +1407,7 @@
                         </tr>
                         <tr>
                             <td>Aménagement du stage :</td>
-                            <td>{{ id.amenagementStagec }}</td>
+                            <td>{{ id.amenagementStage }}</td>
                         </tr>
                         <tr>
                             <td>Gratification :</td>
@@ -1435,5 +1432,32 @@
             </div>
         </div>
     </div>
+
+{#    todo: limiter aux btn back & forward du browser #}
+    <script>
+        // window.addEventListener('beforeunload',(event) =>{
+        //     event.preventDefault();
+        //     event.returnValue = '';
+        // });
+
+        document.onmouseover = function() {
+            //User's mouse is inside the page.
+            window.innerDocClick = true;
+        }
+
+        document.onmouseleave = function() {
+            //User's mouse has left the page.
+            window.innerDocClick = false;
+        }
+
+        window.addEventListener('beforeunload',(event) =>{
+            if (window.innerDocClick) {
+                console.log('user clicked a link');
+            } else {
+                event.preventDefault();
+                event.returnValue = 'test';
+            }
+        });
+    </script>
 {% endblock %}
 

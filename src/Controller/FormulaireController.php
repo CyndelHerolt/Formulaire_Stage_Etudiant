@@ -21,10 +21,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class FormulaireController extends AbstractController
 {
-
     //todo: ajouter les contraintes de validation + message d'erreur
-    //todo: update les entités pr éviter l'accumulation d'entrées dans la DB (https://symfony.com/doc/current/doctrine.html#updating-an-object)
-    //todo: si adresse entreprise & stage || contact responsable & tuteur identiques, ne pas les dupliquer dans la DB, juste reprendre l'id
 
     // -------------------------------------------1ERE ETAPE-------------------------------------------------
     // ------------------------------------------------------------------------------------------------------
@@ -115,8 +112,12 @@ class FormulaireController extends AbstractController
     {
         $id = $stageEtudiantRepository->find($id);
 
-//        $responsable = $id->getEntreprise() -> getResponsable();
-        $responsable = new Contact();
+        if ($id->getEntreprise()->getResponsable() == null) {
+            $responsable = new Contact();
+            $id->getEntreprise()->setResponsable($responsable);
+        } else {
+            $responsable = $id->getEntreprise()->getResponsable();
+        }
 
         $form3 = $this->createForm(ResponsableType::class, $responsable);
 
@@ -126,8 +127,8 @@ class FormulaireController extends AbstractController
 //            die();
 
             if ($form3->isValid()) {
-                $contactRepository->save($responsable, true);
-                $id->getEntreprise()->setResponsable($responsable);
+//                $contactRepository->save($responsable, true);
+//                $id->getEntreprise()->setResponsable($responsable);
                 $stageEtudiantRepository->save($id, true);
 
                 if ($request->request->get('button') == 'responsable_suivant') {

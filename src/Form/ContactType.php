@@ -21,18 +21,12 @@ class ContactType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nom', TextType::class, ['label' => 'Nom * :', 'attr' => ['autocomplete'=>'off']])
-
-            ->add('prenom', TextType::class, ['label' => 'Prénom * :', 'attr' => ['autocomplete'=>'off']])
-
-            ->add('fonction', TextType::class, ['label' => 'Fonction dans l\'entreprise * :', 'attr' => ['autocomplete'=>'off']])
-
-            ->add('telephone', IntegerType::class, ['label' => 'Téléphone :', 'required' => false, 'attr' => ['autocomplete'=>'off']])
-
-            ->add('email', EmailType::class, ['label' => 'Email :', 'required' => false, 'attr' => ['autocomplete'=>'off']])
-
-            ->add('portable', IntegerType::class, ['label' => 'Portable * :', 'attr' => ['autocomplete'=>'off']])
-        ;
+            ->add('nom', TextType::class, ['label' => 'Nom * :'])
+            ->add('prenom', TextType::class, ['label' => 'Prénom * :'])
+            ->add('fonction', TextType::class, ['label' => 'Fonction dans l\'entreprise * :'])
+            ->add('telephone', IntegerType::class, ['label' => 'Téléphone :', 'required' => false])
+            ->add('email', EmailType::class, ['label' => 'Email :', 'required' => false])
+            ->add('portable', IntegerType::class, ['label' => 'Portable * :']);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

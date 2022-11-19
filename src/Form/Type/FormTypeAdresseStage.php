@@ -19,13 +19,32 @@ class FormTypeAdresseStage extends AbstractType
     {
         $builder
             //form_adresse_stage
-            ->add('recup_informations', ButtonType::class, ['label' => 'Récupérer informations', 'attr' => ['autocomplete'=>'off']])
-            ->add('adresse_stage', AdresseType::class, ['label' => 'Adresse du stage', 'required' => false,
+            ->add('recup_informations', ButtonType::class,
+                [
+                    'label' => 'Récupérer informations',
+                    'attr' => ['autocomplete' => 'off']
+                ]
+            )
+            ->add('adresse_stage', AdresseType::class,
+                [
+                    'label' => 'Adresse du stage',
+                    'required' => false,
 //                'constraints' => [new NotBlank(['message' => 'Veuillez renseigner une adresse'])]
-            ])
+                ]
+            )
             ->add('entreprise', EntrepriseType::class)
-            ->add('retour', SubmitType::class, ['label' => 'Etape précédente', 'attr' => ['class' => 'btn-precedent']])
-            ->add('suivant', SubmitType::class, ['label' => 'Etape suivante', 'attr' => ['class' => 'btn-suivant']]);
+            ->add('retour', SubmitType::class,
+                [
+                    'label' => 'Etape précédente',
+                    'attr' => ['class' => 'btn-precedent']
+                ]
+            )
+            ->add('suivant', SubmitType::class,
+                [
+                    'label' => 'Etape suivante',
+                    'attr' => ['class' => 'btn-suivant']
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void

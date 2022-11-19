@@ -28,10 +28,10 @@ class ResponsableType extends AbstractType
 //                'constraints' => [new NotBlank(message: 'Veuillez renseigner ce champ')],
                 'attr' => ['autocomplete' => 'off']])
             ->add('email', EmailType::class, ['label' => 'Email :', 'required' => false,'help' => 'l\'email doit être saisi sous la forme : xxxxxx@xxx.xxx.', 'attr' => ['autocomplete' => 'off']])
-            ->add('telephone', IntegerType::class, ['label' => 'Téléphone :', 'required' => false,'help' => 'le numéro de téléphone doit comporter 10 chiffres.', 'attr' => ['autocomplete' => 'off']])
+            ->add('telephone', IntegerType::class, ['label' => 'Téléphone :', 'required' => false,'help' => 'le numéro de téléphone doit comporter 10 chiffres.'])
             ->add('portable', IntegerType::class, ['label' => 'Portable :', 'help' => 'le numéro de portable doit comporter 10 chiffres.', 'required' => false,
 //                'constraints' => [new NotNull(message: 'Veuillez renseigner ce champ')],
-                'attr' => ['autocomplete' => 'off']])
+                ])
             ->add('retour', SubmitType::class, ['label' => 'Etape précédente', 'attr' => ['class' => 'btn-precedent']])
             ->add('suivant', SubmitType::class, ['label' => 'Etape suivante', 'attr' => ['class' => 'btn-suivant']]);
     }

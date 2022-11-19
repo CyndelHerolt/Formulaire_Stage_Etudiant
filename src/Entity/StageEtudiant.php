@@ -38,52 +38,52 @@ class StageEtudiant
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
 //    #[Assert\NotBlank]
-    private ?\DateTimeInterface $date_debtut_stage = null;
+    private ?\DateTimeInterface $date_debut_stage = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
 //    #[Assert\NotBlank]
     private ?\DateTimeInterface $date_fin_stage = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $duree_jours_stage = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true, type: Types::STRING)]
     private ?string $service_stage_entreprise = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true, type: Types::STRING)]
 //    #[Assert\NotBlank]
     private ?string $sujet_stage = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true, type: Types::STRING)]
 //    #[Assert\NotBlank]
     private ?string $activites = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true, type: Types::STRING)]
     private ?string $periodes_interruptions = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::FLOAT)]
 //    #[Assert\NotBlank]
-    private ?int $duree_hebdomadaire = null;
+    private ?float $duree_hebdomadaire = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true, type: Types::STRING)]
     private ?string $commentaire_duree_hebdomadaire = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $amenagement_stagec = null;
+    #[ORM\Column(length: 255, nullable: true, type: Types::STRING)]
+    private ?string $amenagement_stage = null;
 
-    #[ORM\Column]
+    #[ORM\Column(type: Types::BOOLEAN)]
 //    #[Assert\NotNull]
     private ?bool $gratification = null;
 
-    #[ORM\Column(length: 1, nullable: true)]
+    #[ORM\Column(length: 1, nullable: true, type: Types::STRING)]
 //    #[Assert\NotBlank]
     private ?string $gratification_periode = null;
 
-    #[ORM\Column(nullable: true)]
+    #[ORM\Column(nullable: true, type: Types::FLOAT)]
 //    #[Assert\NotBlank]
-    private ?int $gratification_montant = null;
+    private ?float $gratification_montant = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
+    #[ORM\Column(length: 255, nullable: true, type: Types::STRING)]
     private ?string $avantages = null;
 
 
@@ -97,14 +97,14 @@ class StageEtudiant
         return $this->id;
     }
 
-    public function getDateDebtutStage(): ?\DateTimeInterface
+    public function getDateDebutStage(): ?\DateTimeInterface
     {
-        return $this->date_debtut_stage;
+        return $this->date_debut_stage;
     }
 
-    public function setDateDebtutStage(\DateTimeInterface $date_debtut_stage): self
+    public function setDateDebutStage(\DateTimeInterface $date_debut_stage): self
     {
-        $this->date_debtut_stage = $date_debtut_stage;
+        $this->date_debut_stage = $date_debut_stage;
 
         return $this;
     }
@@ -217,14 +217,14 @@ class StageEtudiant
         return $this;
     }
 
-    public function getAmenagementStagec(): ?string
+    public function getAmenagementStage(): ?string
     {
-        return $this->amenagement_stagec;
+        return $this->amenagement_stage;
     }
 
-    public function setAmenagementStagec(?string $amenagement_stagec): self
+    public function setAmenagementStage(?string $amenagement_stage): self
     {
-        $this->amenagement_stagec = $amenagement_stagec;
+        $this->amenagement_stage = $amenagement_stage;
 
         return $this;
     }
