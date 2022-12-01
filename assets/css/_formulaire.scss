@@ -23,52 +23,48 @@ body {
           }
         }
 
-        .nav-process-circle {
-          margin: 20px 0 30px 0;
-          font-size: 14px;
-        }
-
-        .nav-item .nav-link {
-          background-color: #4D3677;
-
-          i {
-            margin: auto;
-            color: white;
-          }
-        }
-
-        .nav-item.processing .nav-link {
-          background-color: #F7B000;
-
-          i {
-            margin: auto;
-            color: #4D3677;
-          }
-        }
-
-        .nav-item.processing .nav-link::before {
-          box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 2px 6px 2px;
-          background-color: #F7B000;
-        }
-
-        .nav-process-circle .nav-item.complete .nav-link::before {
-          box-shadow: rgba(60, 64, 67, 0.3) 0 1px 2px 0, rgba(60, 64, 67, 0.15) 0 2px 6px 2px;
-          background-color: #F7B000;
+        .nav-process {
+          margin: 25px 0;
         }
 
         .nav-item.complete .nav-link {
           background-color: #F7B000;
 
-          i {
-            margin: auto;
+          .nav-link-number {
+            color: #F7B000;
+          }
+          .nav-link-body {
+            color: white;
+          }
+        }
+
+        .nav-item .nav-link {
+          background-color: rgba(250, 188, 37, 0.33);
+          color: #4D3677;
+          padding: 10px;
+          margin: 4px 0;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+
+          .nav-link-number {
             color: #4D3677;
           }
-
+          .nav-link-body {
+            padding: 10px 0 0 0;
+          }
         }
-
-        .nav-process-circle .nav-item.complete .nav-link::after {
-          color: transparent;
+        .nav-item .nav-link:hover {
+          text-decoration: none;
         }
+        //
+        //.nav-item.processing .nav-link {
+        //  background-color: rgba(250, 188, 37, 0.33);
+        //}
+        //
+        //.nav-item.complete .nav-link {
+        //  background-color: #F7B000;
+        //}
 
         .form-control:focus {
           border-color: #4D3677;
